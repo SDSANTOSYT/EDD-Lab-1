@@ -14,7 +14,7 @@ public abstract class Gestor {
     public abstract ArrayList leer();
     public abstract void actualizar();
     public abstract void eliminar();
-    public abstract void buscarPorId();
-    public abstract void buscarPorClaveSecunddaria();
+    public abstract Object buscarPorId();
+    public abstract ArrayList buscarPorClaveSecunddaria();
 
 }

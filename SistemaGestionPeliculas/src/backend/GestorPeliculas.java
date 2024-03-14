@@ -53,11 +53,15 @@ public class GestorPeliculas extends Gestor {
     }
 
     @Override
-    public void buscarPorId() {
+    public Object buscarPorId() {
+        Pelicula resultado = new Pelicula();
+        return resultado;
     }
 
     @Override
-    public void buscarPorClaveSecunddaria() {
+    public ArrayList buscarPorClaveSecunddaria() {
+        ArrayList resultados = new ArrayList<Pelicula>();
+        return resultados;
     }
 
 }

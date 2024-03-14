@@ -54,11 +54,15 @@ public class GestorClientes extends Gestor {
     }
 
     @Override
-    public void buscarPorId() {
+    public Object buscarPorId() {
+        Cliente resultado = new Cliente();
+        return resultado;
     }
 
     @Override
-    public void buscarPorClaveSecunddaria() {
+    public ArrayList buscarPorClaveSecunddaria() {
+        ArrayList resultados = new ArrayList<Cliente>();
+        return resultados;
     }
 
 }
