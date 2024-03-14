@@ -1,112 +1,58 @@
+package backend;
 
 import java.util.Date;
 
-/**
- *
- */
 public class Compra {
 
-    /**
-     * Default constructor
-     */
+    private long idCompra;
+    private long idCliente;
+    private long idPelicula;
+    private Date fecha;
+
     public Compra() {
     }
 
-    /**
-     *
-     */
-    private long idCompra;
-
-    /**
-     *
-     */
-    private long idCliente;
-
-    /**
-     *
-     */
-    private long idPelicula;
-
-    /**
-     *
-     */
-    private Date fecha;
-
-    /**
-     *
-     */
-    public void Compra() {
-        // TODO implement here
+    public Compra(long idCompra, long idCliente, long idPelicula, Date fecha) {
+        this.idCompra = idCompra;
+        this.idCliente = idCliente;
+        this.idPelicula = idPelicula;
+        this.fecha = fecha;
     }
 
-    /**
-     * @param long idCompra
-     * @param long idCliente
-     * @param long idPelicula
-     * @param Date fecha
-     */
-    public void Compra(long idCompra, long idCliente, long idPelicula, Date fecha) {
-        // TODO implement here
-    }
-
-    /**
-     * @return
-     */
     public long getIdCompra() {
-        // TODO implement here
-        return 0;
+        return idCompra;
     }
 
-    /**
-     * @param idCompra
-     */
     public void setIdCompra(long idCompra) {
-        // TODO implement here
+        this.idCompra = idCompra;
     }
 
-    /**
-     * @return
-     */
     public long getIdCliente() {
-        // TODO implement here
-        return 0;
+        return idCliente;
     }
 
-    /**
-     * @param idCliente
-     */
     public void setIdCliente(long idCliente) {
-        // TODO implement here
+        this.idCliente = idCliente;
     }
 
-    /**
-     * @return
-     */
     public long getIdPelicula() {
-        // TODO implement here
-        return 0;
+        return idPelicula;
     }
 
-    /**
-     * @param idPelicula
-     */
     public void setIdPelicula(long idPelicula) {
-        // TODO implement here
+        this.idPelicula = idPelicula;
     }
 
-    /**
-     * @return
-     */
     public Date getFecha() {
-        // TODO implement here
-        return null;
+        return fecha;
     }
 
-    /**
-     * @param fecha
-     */
     public void setFecha(Date fecha) {
-        // TODO implement here
+        this.fecha = fecha;
     }
 
+    @Override
+    public String toString() {
+        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha + "\n";
+    }
 }

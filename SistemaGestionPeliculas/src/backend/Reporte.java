@@ -1,43 +1,34 @@
+package backend;
 
-import java.util.*;
-
-/**
- * 
- */
 public class Reporte {
 
-    /**
-     * Default constructor
-     */
+    //Constructor vacío
     public Reporte() {
+        
+    }
+    
+    /**
+     * Peliculas más vendidas
+     * Películas ordenadas por numero de ventas
+     */
+    public void generarReportePeliculas(GestorCompras gesCom, GestorPeliculas gesPel) {
+        
     }
 
     /**
-     * 
+     * Clientes con más compras
+     * Clientes ordenados por numero de compras 
      */
-    public void Reporte() {
-        // TODO implement here
+    public void generarReporteClientes(GestorClientes gesCli, GestorCompras gesCom) {
+        
     }
 
     /**
-     * 
+     * Ventas por periodo de tiempo
+     * Mes de compra organizado por numero de ventas
      */
-    public void generarReportePeliculas() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void generarReporteClientes() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void generarReporteVentas() {
-        // TODO implement here
+    public void generarReporteVentas(GestorCompras gesCom) {
+        
     }
 
 }

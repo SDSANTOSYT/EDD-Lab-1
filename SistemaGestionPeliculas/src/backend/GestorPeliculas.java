@@ -1,76 +1,61 @@
+package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- */
 public class GestorPeliculas extends Gestor {
 
-    /**
-     * Default constructor
-     */
+    private HashMap<Long, Pelicula> peliculas;
+
     public GestorPeliculas() {
     }
 
-    /**
-     *
-     */
-    private HashMap<Long, Pelicula> peliculas;
-
-    /**
-     *
-     */
-    public void GestorPeliculas() {
-        // TODO implement here
+    public GestorPeliculas(HashMap<Long, Pelicula> peliculas) {
+        this.peliculas = peliculas;
     }
 
-    /**
-     *
-     */
-    public void Operation1() {
-        // TODO implement here
+    public GestorPeliculas(String ruta, HashMap<Long, Pelicula> peliculas) {
+        super.ruta = ruta;
+        this.peliculas = peliculas;
     }
 
-    /**
-     * @return
-     */
+    public HashMap<Long, Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    public void setPeliculas(HashMap<Long, Pelicula> peliculas) {
+        this.peliculas = peliculas;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
     @Override
     public void agregar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public ArrayList leer() {
         return null;
     }
 
-    /**
-     * @return
-     */
     @Override
     public void actualizar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void eliminar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorId() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorClaveSecunddaria() {
     }

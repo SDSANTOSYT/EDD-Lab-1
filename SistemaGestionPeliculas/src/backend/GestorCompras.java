@@ -1,69 +1,61 @@
+package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- */
 public class GestorCompras extends Gestor {
 
-    /**
-     * Default constructor
-     */
+    private HashMap<Long, Compra> compras;
+
     public GestorCompras() {
     }
 
-    /**
-     *
-     */
-    private HashMap<Long, Compra> compras;
-
-    /**
-     *
-     */
-    public void GestorCompras() {
-        // TODO implement here
+    public GestorCompras(HashMap<Long, Compra> compras) {
+        this.compras = compras;
     }
 
-    /**
-     * @return
-     */
+    public GestorCompras(String ruta, HashMap<Long, Compra> compras) {
+        super.ruta = ruta;
+        this.compras = compras;
+    }
+
+    public HashMap<Long, Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(HashMap<Long, Compra> compras) {
+        this.compras = compras;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
     @Override
     public void agregar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public ArrayList leer() {
         return null;
     }
 
-    /**
-     * @return
-     */
     @Override
     public void actualizar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void eliminar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorId() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorClaveSecunddaria() {
     }

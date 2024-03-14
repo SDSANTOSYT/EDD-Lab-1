@@ -1,70 +1,62 @@
+package backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- */
 public class GestorClientes extends Gestor {
 
-    /**
-     * Default constructor
-     */
+    private HashMap<Long, Cliente> clientes;
+
     public GestorClientes() {
     }
 
-    /**
-     *
-     */
-    private HashMap<Long, Cliente> clientes;
-
-    /**
-     *
-     */
-    public void GestorClientes() {
-        // TODO implement here
+    public GestorClientes(HashMap<Long, Cliente> clientes) {
+        this.clientes = clientes;
     }
 
-    /**
-     * @return
-     */
+    public GestorClientes(String ruta, HashMap<Long, Cliente> clientes) {
+        super.ruta = ruta;
+        this.clientes = clientes;
+    }
+
+    public HashMap<Long, Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(HashMap<Long, Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
     @Override
     public void agregar() {
 
     }
 
-    /**
-     * @return
-     */
     @Override
     public ArrayList leer() {
         return null;
     }
 
-    /**
-     * @return
-     */
     @Override
     public void actualizar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void eliminar() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorId() {
     }
 
-    /**
-     * @return
-     */
     @Override
     public void buscarPorClaveSecunddaria() {
     }
