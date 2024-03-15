@@ -19,6 +19,14 @@ public class Cliente {
         this.numeroDeCompras = numeroDeCompras;
     }
 
+    public Cliente(String datos){
+        this.id = Long.parseLong(datos.split(",")[0]);
+        this.nombre = datos.split(",")[1];
+        this.email = datos.split(",")[2];
+        this.direccion = datos.split(",")[3];
+        this.numeroDeCompras = Integer.parseInt(datos.split(",")[5]);
+    }
+
     public long getId() {
         return id;
     }

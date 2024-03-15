@@ -1,22 +1,25 @@
 package backend;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
 public class GestorCompras extends Gestor {
 
-    private HashMap<Long, Compra> compras;
+    private HashMap<Long, Compra> compras = new HashMap<>();
 
     public GestorCompras() {
     }
 
-    public GestorCompras(HashMap<Long, Compra> compras) {
-        this.compras = compras;
-    }
-
-    public GestorCompras(String ruta, HashMap<Long, Compra> compras) {
-        super.ruta = ruta;
-        this.compras = compras;
+    public GestorCompras(String ruta) {
+        this.ruta = ruta;
+        crear(this.ruta);
     }
 
     public HashMap<Long, Compra> getCompras() {
@@ -35,26 +38,71 @@ public class GestorCompras extends Gestor {
         this.ruta = ruta;
     }
 
-    @Override
-    public void agregar() {
+    public void agregar(Compra com) throws IOException {
+        leer();
+        if (compras.containsKey(com.getIdCompra())) {
+            JOptionPane.showMessageDialog(null, "La compra ya se encuentra registrada.", "ERROR", 0);
+        } else {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
+            bw.write(com.toString());
+            bw.close();
+            compras.put(com.getIdCompra(), com);
+            JOptionPane.showMessageDialog(null, "Compra registrada con exito.", "Registro", 1);
+        }
     }
 
     @Override
-    public ArrayList leer() {
-        return null;
+    public ArrayList<String> leer() {
+        ArrayList<String> datos = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta + ".txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                Compra compraGenerica = new Compra(linea);
+                compras.put(compraGenerica.getIdCompra(), compraGenerica);
+                datos.add(linea);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return datos;
+    }
+
+    public void actualizar(Long id, String datosNuevos) throws IOException {
+        leer();
+        if (compras.containsKey(id)) {
+            Compra nuevaCom = new Compra(id + "," + datosNuevos);
+            compras.put(id, nuevaCom);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
+            for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
+                Compra value = compra.getValue();
+                bw.write(value.toString());
+                bw.close();
+            }
+            JOptionPane.showMessageDialog(null, "Compra actualizada con exito.", "Actualizar", 1);
+        } else {
+            JOptionPane.showMessageDialog(null, "La compra no se encuentra registrada.", "ERROR", 0);
+        }
+    }
+
+    public void eliminar(Long id) throws IOException {
+        leer();
+        if (compras.containsKey(id)) {
+            compras.remove(id);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
+            for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
+                Compra value = compra.getValue();
+                bw.write(value.toString());
+                bw.close();
+            }
+            JOptionPane.showMessageDialog(null, "Compra eliminada con exito.", "Eliminar", 1);
+        } else {
+            JOptionPane.showMessageDialog(null, "La compra no se encuentra registrada.", "ERROR", 0);
+        }
     }
 
     @Override
-    public void actualizar() {
-    }
-
-    @Override
-    public void eliminar() {
-    }
-
-    @Override
-    public Object buscarPorId() {
-        Compra resultado = new Compra();
+    public String buscarPorId() {
+        String resultado = "";
         return resultado;
     }
 
@@ -63,5 +111,4 @@ public class GestorCompras extends Gestor {
         ArrayList resultados = new ArrayList<Compra>();
         return resultados;
     }
-
 }

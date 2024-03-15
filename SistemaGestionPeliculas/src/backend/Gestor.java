@@ -1,20 +1,27 @@
 package backend;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Gestor {
 
     protected String ruta;
-    
-    public void crear() {
-        
+
+    //Si el archivo no esta creado, crearlo
+    public void crear(String nombreArchivo) {
+        File archivo = new File(nombreArchivo + ".txt");
+        try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
+
+    public abstract ArrayList<String> leer();
     
-    public abstract void agregar();
-    public abstract ArrayList leer();
-    public abstract void actualizar();
-    public abstract void eliminar();
-    public abstract Object buscarPorId();
+    public abstract String buscarPorId();
+
     public abstract ArrayList buscarPorClaveSecunddaria();
 
 }

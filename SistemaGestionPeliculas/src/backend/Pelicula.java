@@ -22,6 +22,16 @@ public class Pelicula {
         this.precio = precio;
         this.numeroDeVentas = numeroDeVentas;
     }
+    
+    public Pelicula(String datos){
+        this.id = Long.parseLong(datos.split(",")[0]);
+        this.titulo = datos.split(",")[1];
+        this.director = datos.split(",")[2];
+        this.year = Integer.parseInt(datos.split(",")[3]);
+        this.genero = datos.split(",")[4];
+        this.precio = Double.parseDouble(datos.split(",")[5]);
+        this.numeroDeVentas = Integer.parseInt(datos.split(",")[6]);
+    }
 
     public long getId() {
         return id;

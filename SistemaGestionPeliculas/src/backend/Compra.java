@@ -1,22 +1,30 @@
 package backend;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Compra {
 
     private long idCompra;
     private long idCliente;
     private long idPelicula;
-    private Date fecha;
+    private LocalDate fecha;
 
     public Compra() {
     }
 
-    public Compra(long idCompra, long idCliente, long idPelicula, Date fecha) {
+    public Compra(long idCompra, long idCliente, long idPelicula, LocalDate fecha) {
         this.idCompra = idCompra;
         this.idCliente = idCliente;
         this.idPelicula = idPelicula;
         this.fecha = fecha;
+    }
+    
+    public Compra(String datos){
+        this.idCompra = Long.parseLong(datos.split(",")[0]);
+        this.idCliente = Long.parseLong(datos.split(",")[1]);
+        this.idPelicula = Long.parseLong(datos.split(",")[2]);
+        this.fecha = LocalDate.parse(datos.split(",")[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public long getIdCompra() {
@@ -43,16 +51,16 @@ public class Compra {
         this.idPelicula = idPelicula;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFecha(String fecha) {
+        this.fecha = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
     public String toString() {
-        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha + "\n";
+        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
     }
 }
