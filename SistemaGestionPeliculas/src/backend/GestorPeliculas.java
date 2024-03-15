@@ -112,5 +112,5 @@ public class GestorPeliculas extends Gestor {
         ArrayList resultados = new ArrayList<Pelicula>();
         return resultados;
     }
-
+    
 }
