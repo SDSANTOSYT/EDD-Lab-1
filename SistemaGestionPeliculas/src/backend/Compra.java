@@ -13,11 +13,11 @@ public class Compra implements Comparable<Compra> {
     public Compra() {
     }
 
-    public Compra(long idCompra, long idCliente, long idPelicula, LocalDate fecha) {
+    public Compra(long idCompra, long idCliente, long idPelicula, String fecha) {
         this.idCompra = idCompra;
         this.idCliente = idCliente;
         this.idPelicula = idPelicula;
-        this.fecha = fecha;
+        this.fecha = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public Compra(String datos) {
