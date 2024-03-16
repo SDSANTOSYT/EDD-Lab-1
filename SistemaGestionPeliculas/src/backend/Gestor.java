@@ -19,7 +19,11 @@ public abstract class Gestor {
     }
 
     public abstract ArrayList<String> leer();
-    
+
+    public abstract void actualizar(Long id, String datosNuevos) throws IOException;
+
+    public abstract void eliminar(Long id) throws IOException;
+
     public abstract String buscarPorId();
 
     public abstract ArrayList buscarPorClaveSecunddaria();

@@ -67,6 +67,7 @@ public class GestorCompras extends Gestor {
         return datos;
     }
 
+    @Override
     public void actualizar(Long id, String datosNuevos) throws IOException {
         leer();
         if (compras.containsKey(id)) {
@@ -84,6 +85,7 @@ public class GestorCompras extends Gestor {
         }
     }
 
+    @Override
     public void eliminar(Long id) throws IOException {
         leer();
         if (compras.containsKey(id)) {

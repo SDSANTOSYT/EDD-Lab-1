@@ -68,6 +68,7 @@ public class GestorPeliculas extends Gestor {
         return datos;
     }
 
+    @Override
     public void actualizar(Long id, String datosNuevos) throws IOException {
         leer();
         if (peliculas.containsKey(id)) {
@@ -85,6 +86,7 @@ public class GestorPeliculas extends Gestor {
         }
     }
 
+    @Override
     public void eliminar(Long id) throws IOException {
         leer();
         if (peliculas.containsKey(id)) {
