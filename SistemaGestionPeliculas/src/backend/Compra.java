@@ -3,7 +3,7 @@ package backend;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Compra {
+public class Compra implements Comparable<Compra> {
 
     private long idCompra;
     private long idCliente;
@@ -19,8 +19,8 @@ public class Compra {
         this.idPelicula = idPelicula;
         this.fecha = fecha;
     }
-    
-    public Compra(String datos){
+
+    public Compra(String datos) {
         this.idCompra = Long.parseLong(datos.split(",")[0]);
         this.idCliente = Long.parseLong(datos.split(",")[1]);
         this.idPelicula = Long.parseLong(datos.split(",")[2]);
@@ -62,5 +62,10 @@ public class Compra {
     @Override
     public String toString() {
         return idCompra + "," + idCliente + "," + idPelicula + "," + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
+    }
+
+    @Override
+    public int compareTo(Compra o) {
+        return this.getFecha().compareTo(o.getFecha());
     }
 }

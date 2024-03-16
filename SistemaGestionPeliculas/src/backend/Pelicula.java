@@ -1,6 +1,6 @@
 package backend;
 
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula> {
 
     private long id;
     private String titulo;
@@ -9,7 +9,7 @@ public class Pelicula {
     private String genero;
     private double precio;
     private int numeroDeVentas;
-    
+
     public Pelicula() {
     }
 
@@ -22,8 +22,8 @@ public class Pelicula {
         this.precio = precio;
         this.numeroDeVentas = numeroDeVentas;
     }
-    
-    public Pelicula(String datos){
+
+    public Pelicula(String datos) {
         this.id = Long.parseLong(datos.split(",")[0]);
         this.titulo = datos.split(",")[1];
         this.director = datos.split(",")[2];
@@ -88,9 +88,20 @@ public class Pelicula {
     public void setNumeroDeVentas(int numeroDeVentas) {
         this.numeroDeVentas = numeroDeVentas;
     }
-    
+
     @Override
     public String toString() {
         return id + "," + titulo + "," + director + "," + year + "," + genero + "," + precio + "," + numeroDeVentas + "\n";
+    }
+
+    @Override
+    public int compareTo(Pelicula otraPelicula) {
+        if (this.getNumeroDeVentas() > otraPelicula.getNumeroDeVentas()) {
+            return -1;
+        }
+        if (this.getNumeroDeVentas() < otraPelicula.getNumeroDeVentas()) {
+            return 1;
+        }
+        return 0;
     }
 }

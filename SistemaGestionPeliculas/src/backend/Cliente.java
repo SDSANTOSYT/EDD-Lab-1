@@ -1,13 +1,13 @@
 package backend;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
 
     private long id;
     private String nombre;
     private String email;
     private String direccion;
     private int numeroDeCompras;
-    
+
     public Cliente() {
     }
 
@@ -19,7 +19,7 @@ public class Cliente {
         this.numeroDeCompras = numeroDeCompras;
     }
 
-    public Cliente(String datos){
+    public Cliente(String datos) {
         this.id = Long.parseLong(datos.split(",")[0]);
         this.nombre = datos.split(",")[1];
         this.email = datos.split(",")[2];
@@ -66,9 +66,20 @@ public class Cliente {
     public void setNumeroDeCompras(int numeroDeCompras) {
         this.numeroDeCompras = numeroDeCompras;
     }
-    
+
     @Override
     public String toString() {
         return id + "," + nombre + "," + email + "," + direccion + "," + numeroDeCompras + "\n";
+    }
+
+    @Override
+    public int compareTo(Cliente otroCliente) {
+        if (this.getNumeroDeCompras() > otroCliente.getNumeroDeCompras()) {
+            return -1;
+        }
+        if (this.getNumeroDeCompras() < otroCliente.getNumeroDeCompras()) {
+            return 1;
+        }
+        return 0;
     }
 }
