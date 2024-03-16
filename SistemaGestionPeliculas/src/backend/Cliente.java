@@ -24,7 +24,7 @@ public class Cliente implements Comparable<Cliente> {
         this.nombre = datos.split(",")[1];
         this.email = datos.split(",")[2];
         this.direccion = datos.split(",")[3];
-        this.numeroDeCompras = Integer.parseInt(datos.split(",")[5]);
+        this.numeroDeCompras = Integer.parseInt(datos.split(",")[4]);
     }
 
     public long getId() {
