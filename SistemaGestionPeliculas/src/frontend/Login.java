@@ -29,6 +29,7 @@ public class Login extends javax.swing.JFrame {
     public static GestorPeliculas gestorPeliculas;
     public static Reporte generadorReporte;
     public static Cliente cliente;
+    public static String user;
 
     public Login() {
         gestorCliente = new GestorClientes("clientes");
@@ -57,6 +58,7 @@ public class Login extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(71, 160, 209));
@@ -145,6 +147,7 @@ public class Login extends javax.swing.JFrame {
                     if (!est) {
                         switch (JOptionPane.showConfirmDialog(null, "Usuario no encontrado. \n Desea registrarse?", "Error", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
                             case 0:
+                                user = tFieldUsuario.getText();
                                 new RegistrarUsuarioCliente().setVisible(true);
                                 this.dispose();
                                 break;

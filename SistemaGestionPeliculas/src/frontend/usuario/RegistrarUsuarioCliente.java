@@ -8,8 +8,7 @@ import backend.Cliente;
 import static frontend.Login.gestorCliente;
 import java.io.IOException;
 import static frontend.Login.cliente;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static frontend.Login.user;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +22,7 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
      */
     public RegistrarUsuarioCliente() {
         initComponents();
+        txtID.setText(user);
         this.setLocationRelativeTo(null);
     }
 

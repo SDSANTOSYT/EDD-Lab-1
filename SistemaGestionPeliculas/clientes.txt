@@ -1,2 +1,0 @@
-1234,Sebastian,sdsantos@uninorte.edu.co,Calle 45A #23-32,0
-12345,Carlos,cmorales@uninorte.edu.co,Calle 73 #24-53,0
