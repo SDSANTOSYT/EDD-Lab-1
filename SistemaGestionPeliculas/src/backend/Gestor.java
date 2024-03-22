@@ -1,58 +1,31 @@
+package backend;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- */
 public abstract class Gestor {
 
-    /**
-     * Default constructor
-     */
-    public Gestor() {
-    }
-
-    /**
-     *
-     */
     protected String ruta;
 
-    /**
-     * @return
-     */
-    public void crear() {
-        // TODO implement here
-
+    //Si el archivo no esta creado, crearlo
+    public void crear(String nombreArchivo) {
+        File archivo = new File(nombreArchivo + ".txt");
+        try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
-    /**
-     * @return
-     */
-    public abstract void agregar();
+    public abstract ArrayList<String> leer();
 
-    /**
-     * @return
-     */
-    public abstract ArrayList leer();
+    public abstract void actualizar(Long id, String datosNuevos) throws IOException;
 
-    /**
-     * @return
-     */
-    public abstract void actualizar();
+    public abstract void eliminar(Long id) throws IOException;
 
-    /**
-     * @return
-     */
-    public abstract void eliminar();
+    public abstract String buscarPorId(Long id);
 
-    /**
-     * @return
-     */
-    public abstract void buscarPorId();
-
-    /**
-     * @return
-     */
-    public abstract void buscarPorClaveSecunddaria();
+    public abstract ArrayList buscarPorClaveSecundaria(String Clave, int Option);
 
 }

@@ -1,131 +1,85 @@
+package backend;
 
-/**
- *
- */
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
 
-    /**
-     * Default constructor
-     */
+    private long id;
+    private String nombre;
+    private String email;
+    private String direccion;
+    private int numeroDeCompras;
+
     public Cliente() {
     }
 
-    /**
-     *
-     */
-    private long id;
-
-    /**
-     *
-     */
-    private String nombre;
-
-    /**
-     *
-     */
-    private String email;
-
-    /**
-     *
-     */
-    private String direccion;
-
-    /**
-     *
-     */
-    private int numeroDeCompras;
-
-    /**
-     *
-     */
-    public void Cliente() {
-        // TODO implement here
+    public Cliente(long id, String nombre, String email, String direccion, int numeroDeCompras) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.direccion = direccion;
+        this.numeroDeCompras = numeroDeCompras;
     }
 
-    /**
-     * @param long id
-     * @param String nombre
-     * @param String email
-     * @param String direccion
-     * @param int numeroDeCompras
-     */
-    public void Cliente(long id, String nombre, String email, String direccion, int numeroDeCompras) {
-        // TODO implement here
+    public Cliente(String datos) {
+        this.id = Long.parseLong(datos.split(",")[0]);
+        this.nombre = datos.split(",")[1];
+        this.email = datos.split(",")[2];
+        this.direccion = datos.split(",")[3];
+        this.numeroDeCompras = Integer.parseInt(datos.split(",")[4]);
     }
 
-    /**
-     * @return
-     */
     public long getId() {
-        // TODO implement here
-        return 0;
+        return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(long id) {
-        // TODO implement here
+        this.id = id;
     }
 
-    /**
-     * @return
-     */
     public String getNombre() {
-        // TODO implement here
-        return "";
+        return nombre;
     }
 
-    /**
-     * @param nombre
-     */
     public void setNombre(String nombre) {
-        // TODO implement here
+        this.nombre = nombre;
     }
 
-    /**
-     * @return
-     */
     public String getEmail() {
-        // TODO implement here
-        return "";
+        return email;
     }
 
-    /**
-     * @param email
-     */
     public void setEmail(String email) {
-        // TODO implement here
+        this.email = email;
     }
 
-    /**
-     * @return
-     */
     public String getDireccion() {
-        // TODO implement here
-        return "";
+        return direccion;
     }
 
-    /**
-     * @param direccion
-     */
     public void setDireccion(String direccion) {
-        // TODO implement here
+        this.direccion = direccion;
     }
 
-    /**
-     * @return
-     */
     public int getNumeroDeCompras() {
-        // TODO implement here
+        return numeroDeCompras;
+    }
+
+    public void setNumeroDeCompras(int numeroDeCompras) {
+        this.numeroDeCompras = numeroDeCompras;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + nombre + "," + email + "," + direccion + "," + numeroDeCompras + "\n";
+    }
+
+    @Override
+    public int compareTo(Cliente otroCliente) {
+        if (this.getNumeroDeCompras() > otroCliente.getNumeroDeCompras()) {
+            return -1;
+        }
+        if (this.getNumeroDeCompras() < otroCliente.getNumeroDeCompras()) {
+            return 1;
+        }
         return 0;
     }
-
-    /**
-     * @param num
-     */
-    public void setNumeroDeCompras(int num) {
-        // TODO implement here
-    }
-
 }

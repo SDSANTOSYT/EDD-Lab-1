@@ -1,173 +1,107 @@
+package backend;
 
-/**
- *
- */
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula> {
 
-    /**
-     * Default constructor
-     */
+    private long id;
+    private String titulo;
+    private String director;
+    private int year;
+    private String genero;
+    private double precio;
+    private int numeroDeVentas;
+
     public Pelicula() {
     }
 
-    /**
-     *
-     */
-    private long id;
-
-    /**
-     *
-     */
-    private String titulo;
-
-    /**
-     *
-     */
-    private String director;
-
-    /**
-     *
-     */
-    private int year;
-
-    /**
-     *
-     */
-    private String genero;
-
-    /**
-     *
-     */
-    private double precio;
-
-    /**
-     *
-     */
-    private int numeroDeVentas;
-
-    /**
-     *
-     */
-    public void Pelicula() {
-        // TODO implement here
+    public Pelicula(long id, String titulo, String director, int year, String genero, double precio, int numeroDeVentas) {
+        this.id = id;
+        this.titulo = titulo;
+        this.director = director;
+        this.year = year;
+        this.genero = genero;
+        this.precio = precio;
+        this.numeroDeVentas = numeroDeVentas;
     }
 
-    /**
-     * @param long id
-     * @param String titulo
-     * @param String director
-     * @param int year
-     * @param String genero
-     * @param double precio
-     * @param int numeroDeVentas
-     */
-    public void Pelicula(long id, String titulo, String director, int year, String genero, double precio, int numeroDeVentas) {
-        // TODO implement here
+    public Pelicula(String datos) {
+        this.id = Long.parseLong(datos.split(",")[0]);
+        this.titulo = datos.split(",")[1];
+        this.director = datos.split(",")[2];
+        this.year = Integer.parseInt(datos.split(",")[3]);
+        this.genero = datos.split(",")[4];
+        this.precio = Double.parseDouble(datos.split(",")[5]);
+        this.numeroDeVentas = Integer.parseInt(datos.split(",")[6]);
     }
 
-    /**
-     * @return
-     */
     public long getId() {
-        // TODO implement here
-        return 0;
+        return id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(long id) {
-        // TODO implement here
+        this.id = id;
     }
 
-    /**
-     * @return
-     */
     public String getTitulo() {
-        // TODO implement here
-        return "";
+        return titulo;
     }
 
-    /**
-     * @param titulo
-     */
     public void setTitulo(String titulo) {
-        // TODO implement here
+        this.titulo = titulo;
     }
 
-    /**
-     * @return
-     */
     public String getDirector() {
-        // TODO implement here
-        return "";
+        return director;
     }
 
-    /**
-     * @param director
-     */
     public void setDirector(String director) {
-        // TODO implement here
+        this.director = director;
     }
 
-    /**
-     * @return
-     */
     public int getYear() {
-        // TODO implement here
-        return 0;
+        return year;
     }
 
-    /**
-     * @param year
-     */
     public void setYear(int year) {
-        // TODO implement here
+        this.year = year;
     }
 
-    /**
-     * @return
-     */
     public String getGenero() {
-        // TODO implement here
-        return "";
+        return genero;
     }
 
-    /**
-     * @param genero
-     */
     public void setGenero(String genero) {
-        // TODO implement here
+        this.genero = genero;
     }
 
-    /**
-     * @return
-     */
     public double getPrecio() {
-        // TODO implement here
-        return 0.0d;
+        return precio;
     }
 
-    /**
-     * @param precio
-     */
     public void setPrecio(double precio) {
-        // TODO implement here
+        this.precio = precio;
     }
 
-    /**
-     * @return
-     */
     public int getNumeroDeVentas() {
-        // TODO implement here
+        return numeroDeVentas;
+    }
+
+    public void setNumeroDeVentas(int numeroDeVentas) {
+        this.numeroDeVentas = numeroDeVentas;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + titulo + "," + director + "," + year + "," + genero + "," + precio + "," + numeroDeVentas + "\n";
+    }
+
+    @Override
+    public int compareTo(Pelicula otraPelicula) {
+        if (this.getNumeroDeVentas() > otraPelicula.getNumeroDeVentas()) {
+            return -1;
+        }
+        if (this.getNumeroDeVentas() < otraPelicula.getNumeroDeVentas()) {
+            return 1;
+        }
         return 0;
     }
-
-    /**
-     * @param num
-     */
-    public void setNumeroDeVentas(int num) {
-        // TODO implement here
-    }
-
 }

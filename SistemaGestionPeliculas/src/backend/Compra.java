@@ -1,112 +1,71 @@
+package backend;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-/**
- *
- */
-public class Compra {
+public class Compra implements Comparable<Compra> {
 
-    /**
-     * Default constructor
-     */
+    private long idCompra;
+    private long idCliente;
+    private long idPelicula;
+    private LocalDate fecha;
+
     public Compra() {
     }
 
-    /**
-     *
-     */
-    private long idCompra;
-
-    /**
-     *
-     */
-    private long idCliente;
-
-    /**
-     *
-     */
-    private long idPelicula;
-
-    /**
-     *
-     */
-    private Date fecha;
-
-    /**
-     *
-     */
-    public void Compra() {
-        // TODO implement here
+    public Compra(long idCompra, long idCliente, long idPelicula, String fecha) {
+        this.idCompra = idCompra;
+        this.idCliente = idCliente;
+        this.idPelicula = idPelicula;
+        this.fecha = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    /**
-     * @param long idCompra
-     * @param long idCliente
-     * @param long idPelicula
-     * @param Date fecha
-     */
-    public void Compra(long idCompra, long idCliente, long idPelicula, Date fecha) {
-        // TODO implement here
+    public Compra(String datos) {
+        this.idCompra = Long.parseLong(datos.split(",")[0]);
+        this.idCliente = Long.parseLong(datos.split(",")[1]);
+        this.idPelicula = Long.parseLong(datos.split(",")[2]);
+        this.fecha = LocalDate.parse(datos.split(",")[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    /**
-     * @return
-     */
     public long getIdCompra() {
-        // TODO implement here
-        return 0;
+        return idCompra;
     }
 
-    /**
-     * @param idCompra
-     */
     public void setIdCompra(long idCompra) {
-        // TODO implement here
+        this.idCompra = idCompra;
     }
 
-    /**
-     * @return
-     */
     public long getIdCliente() {
-        // TODO implement here
-        return 0;
+        return idCliente;
     }
 
-    /**
-     * @param idCliente
-     */
     public void setIdCliente(long idCliente) {
-        // TODO implement here
+        this.idCliente = idCliente;
     }
 
-    /**
-     * @return
-     */
     public long getIdPelicula() {
-        // TODO implement here
-        return 0;
+        return idPelicula;
     }
 
-    /**
-     * @param idPelicula
-     */
     public void setIdPelicula(long idPelicula) {
-        // TODO implement here
+        this.idPelicula = idPelicula;
     }
 
-    /**
-     * @return
-     */
-    public Date getFecha() {
-        // TODO implement here
-        return null;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    /**
-     * @param fecha
-     */
-    public void setFecha(Date fecha) {
-        // TODO implement here
+    public void setFecha(String fecha) {
+        this.fecha = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
+    @Override
+    public String toString() {
+        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
+    }
+
+    @Override
+    public int compareTo(Compra o) {
+        return this.getFecha().compareTo(o.getFecha());
+    }
 }
