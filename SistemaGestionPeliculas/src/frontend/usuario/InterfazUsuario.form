@@ -234,7 +234,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="30" green="a7" red="f2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#xa;A&#xd1;ADIR AL CARRITO"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; A&#xd1;ADIR AL &lt;br&gt;CARRITO"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[216, 70]"/>
             </Property>
@@ -366,7 +366,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="30" green="a7" red="f2" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#xa;A&#xd1;ADIR AL CARRITO"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; A&#xd1;ADIR AL &lt;br&gt;CARRITO"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[216, 70]"/>
             </Property>

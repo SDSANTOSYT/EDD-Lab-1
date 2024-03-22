@@ -179,7 +179,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         botonAgregarAlCarrito2.setBackground(new java.awt.Color(71, 160, 209));
         botonAgregarAlCarrito2.setFont(new java.awt.Font("Lucida Sans", 1, 20)); // NOI18N
         botonAgregarAlCarrito2.setForeground(new java.awt.Color(242, 167, 48));
-        botonAgregarAlCarrito2.setText("<html><center>\nAÑADIR AL CARRITO");
+        botonAgregarAlCarrito2.setText("<html><center> AÑADIR AL <br>CARRITO");
         botonAgregarAlCarrito2.setPreferredSize(new java.awt.Dimension(216, 70));
         panelFondo.add(botonAgregarAlCarrito2, new org.netbeans.lib.awtextra.AbsoluteConstraints(868, 600, -1, -1));
 
@@ -221,7 +221,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         botonAgregarAlCarrito1.setBackground(new java.awt.Color(71, 160, 209));
         botonAgregarAlCarrito1.setFont(new java.awt.Font("Lucida Sans", 1, 20)); // NOI18N
         botonAgregarAlCarrito1.setForeground(new java.awt.Color(242, 167, 48));
-        botonAgregarAlCarrito1.setText("<html><center>\nAÑADIR AL CARRITO");
+        botonAgregarAlCarrito1.setText("<html><center> AÑADIR AL <br>CARRITO");
         botonAgregarAlCarrito1.setPreferredSize(new java.awt.Dimension(216, 70));
         panelFondo.add(botonAgregarAlCarrito1, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 600, -1, -1));
 

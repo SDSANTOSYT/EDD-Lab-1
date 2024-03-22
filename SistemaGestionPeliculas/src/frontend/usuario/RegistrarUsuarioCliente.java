@@ -4,6 +4,13 @@
  */
 package frontend.usuario;
 
+import backend.Cliente;
+import static frontend.usuario.Login.gestorCliente;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sebas
@@ -33,15 +40,20 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
         tituloNombre = new javax.swing.JLabel();
         tituloEmail = new javax.swing.JLabel();
         tituloDireccion = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
+        txtID = new javax.swing.JFormattedTextField();
         txtNombre = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
+        txtDireccionParte4 = new javax.swing.JTextField();
+        txtDireccionParte3 = new javax.swing.JTextField();
+        txtDireccionParte2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        comboBoxDireccion = new javax.swing.JComboBox<>();
         panelTituloRegistro = new javax.swing.JPanel();
         tituloRegistro = new javax.swing.JLabel();
+        botonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,13 +80,58 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
         tituloDireccion.setForeground(new java.awt.Color(242, 167, 48));
         tituloDireccion.setText("Direccion:");
 
+        txtID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtID.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDKeyTyped(evt);
+            }
+        });
 
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNombre.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtEmail.setPreferredSize(new java.awt.Dimension(75, 38));
 
-        txtDireccion.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtDireccionParte4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDireccionParte4.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtDireccionParte4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionParte4KeyTyped(evt);
+            }
+        });
+
+        txtDireccionParte3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDireccionParte3.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtDireccionParte3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionParte3KeyTyped(evt);
+            }
+        });
+
+        txtDireccionParte2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDireccionParte2.setPreferredSize(new java.awt.Dimension(75, 38));
+        txtDireccionParte2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionParte2KeyTyped(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        jLabel1.setText("#");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        jLabel2.setText("-");
+
+        comboBoxDireccion.setFont(new java.awt.Font("Lucida Sans", 0, 16)); // NOI18N
+        comboBoxDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Calle", "Cra" }));
 
         javax.swing.GroupLayout panelFormularioRegistroLayout = new javax.swing.GroupLayout(panelFormularioRegistro);
         panelFormularioRegistro.setLayout(panelFormularioRegistroLayout);
@@ -87,37 +144,57 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
                     .addComponent(tituloEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tituloDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(tituloID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFormularioRegistroLayout.createSequentialGroup()
+                        .addComponent(comboBoxDireccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDireccionParte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtDireccionParte3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtDireccionParte4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         panelFormularioRegistroLayout.setVerticalGroup(
             panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFormularioRegistroLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFormularioRegistroLayout.createSequentialGroup()
+                .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelFormularioRegistroLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccionParte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccionParte3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccionParte4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(comboBoxDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelFormularioRegistroLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addGroup(panelFormularioRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tituloEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(52, 52, 52)
+                        .addComponent(tituloDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46))
         );
 
-        panelFondo.add(panelFormularioRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 203, -1, -1));
+        panelFondo.add(panelFormularioRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 203, -1, -1));
 
         panelTituloRegistro.setBackground(new java.awt.Color(71, 160, 209));
         panelTituloRegistro.setPreferredSize(new java.awt.Dimension(638, 133));
@@ -144,7 +221,19 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelFondo.add(panelTituloRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 25, -1, -1));
+        panelFondo.add(panelTituloRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 25, -1, -1));
+
+        botonRegistrarse.setBackground(new java.awt.Color(37, 110, 151));
+        botonRegistrarse.setFont(new java.awt.Font("Lucida Sans", 1, 20)); // NOI18N
+        botonRegistrarse.setForeground(new java.awt.Color(242, 167, 48));
+        botonRegistrarse.setText("<html><center> REGISTRARSE");
+        botonRegistrarse.setPreferredSize(new java.awt.Dimension(216, 70));
+        botonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarseActionPerformed(evt);
+            }
+        });
+        panelFondo.add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 620, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,6 +248,72 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIDKeyTyped
+
+    private void txtDireccionParte4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionParte4KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionParte4KeyTyped
+
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
+        // TODO add your handling code here:
+        if (txtNombre.getText().isBlank() || txtEmail.getText().isBlank() || txtDireccionParte2.getText().isBlank() || txtDireccionParte3.getText().isBlank() || txtDireccionParte4.getText().isBlank() || txtID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos antes de registrarse", "ERROR", 0);
+        } else {
+            try {
+                long id = Long.parseLong(txtID.getText());
+                String nombre = txtNombre.getText();
+                String email = txtEmail.getText();
+                String direccion = comboBoxDireccion.getSelectedItem() + " " + txtDireccionParte2.getText() + " #" + txtDireccionParte3.getText() + "-" + txtDireccionParte4.getText();
+                Cliente cli = new Cliente(id, nombre, email, direccion, 0);
+                try {
+                    gestorCliente.agregar(cli);
+                    InterfazUsuario i = new InterfazUsuario();
+                    i.setVisible(true);
+                    this.dispose();
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
+
+    private void txtDireccionParte2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionParte2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionParte2KeyTyped
+
+    private void txtDireccionParte3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionParte3KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isSpaceChar(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionParte3KeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     /**
      * @param args the command line arguments
@@ -196,6 +351,10 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonRegistrarse;
+    private javax.swing.JComboBox<String> comboBoxDireccion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JPanel panelFormularioRegistro;
     private javax.swing.JPanel panelTituloRegistro;
@@ -204,9 +363,11 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
     private javax.swing.JLabel tituloID;
     private javax.swing.JLabel tituloNombre;
     private javax.swing.JLabel tituloRegistro;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDireccionParte2;
+    private javax.swing.JTextField txtDireccionParte3;
+    private javax.swing.JTextField txtDireccionParte4;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtID;
+    private javax.swing.JFormattedTextField txtID;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
