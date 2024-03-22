@@ -5,7 +5,7 @@
 package frontend.usuario;
 
 import backend.Cliente;
-import static frontend.usuario.Login.gestorCliente;
+import static frontend.Login.gestorCliente;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
