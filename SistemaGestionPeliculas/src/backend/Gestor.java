@@ -24,8 +24,8 @@ public abstract class Gestor {
 
     public abstract void eliminar(Long id) throws IOException;
 
-    public abstract String buscarPorId();
+    public abstract String buscarPorId(Long id);
 
-    public abstract ArrayList buscarPorClaveSecunddaria();
+    public abstract ArrayList buscarPorClaveSecundaria(String Clave, int Option);
 
 }

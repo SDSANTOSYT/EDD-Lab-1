@@ -104,15 +104,87 @@ public class GestorPeliculas extends Gestor {
     }
 
     @Override
-    public String buscarPorId() {
-        String resultado = "";
-        return resultado;
+    public String buscarPorId(Long id) {
+        return peliculas.get(id).toString();
     }
 
     @Override
-    public ArrayList buscarPorClaveSecunddaria() {
-        ArrayList resultados = new ArrayList<Pelicula>();
-        return resultados;
+    public ArrayList buscarPorClaveSecundaria(String Clave, int Option) {
+        ArrayList<String> filtrado = new ArrayList<String>();
+        switch (Option) {
+            //Por Autor
+            case 1:
+                for (Long id : this.peliculas.keySet()) {
+                    if (this.peliculas.get(id).getDirector().equalsIgnoreCase(Clave)) {
+                        filtrado.add(peliculas.get(id).toString());
+                    }
+                }
+                break;
+            //Por Genero
+            case 2:
+                for (Long id : this.peliculas.keySet()) {
+                    if (this.peliculas.get(id).getGenero().equalsIgnoreCase(Clave)) {
+                        filtrado.add(peliculas.get(id).toString());
+                    }
+                }
+                break;
+            //Por Titulo
+            case 3:
+                for (Long id : this.peliculas.keySet()) {
+                    if (this.peliculas.get(id).getTitulo().equalsIgnoreCase(Clave)) {
+                        filtrado.add(peliculas.get(id).toString());
+                    }
+                }
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        if (filtrado.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron películas");
+        }
+        return filtrado;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        
+        GestorPeliculas gesPel = new GestorPeliculas("PruebaPeliculas");
+        gesPel.agregar(new Pelicula(1, "Pel1", "Dir1", 2012, "gen1", 1, 5));
+        gesPel.agregar(new Pelicula(2, "Pel1", "Dir1", 2012, "gen1", 1, 5));
+        gesPel.agregar(new Pelicula(3, "Pel1", "Dir1", 2012, "gen1", 1, 5));
+        gesPel.agregar(new Pelicula(4, "Pel2", "Dir1", 2012, "gen1", 1, 5));
+        gesPel.agregar(new Pelicula(5, "Pel2", "Dir2", 2013, "gen2", 2, 5));
+        gesPel.agregar(new Pelicula(6, "Pel6", "Dir2", 2013, "gen2", 2, 5));
+        gesPel.agregar(new Pelicula(7, "Pel7", "Dir2", 2013, "gen2", 2, 5));
+        gesPel.agregar(new Pelicula(8, "Pel8", "Dir2", 2013, "gen2", 2, 5));
+       
+        gesPel.buscarPorId((long)1);
+        //1 director
+        //2 genero
+        //3 titulo
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("Dir1", 1).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("Dir1", 1).get(i));
+        }
+        System.out.println("pausa");
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("Dir2", 1).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("Dir2", 1).get(i));
+        }
+        System.out.println("pausa");
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("gen1", 2).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("gen1", 2).get(i));
+        }
+        System.out.println("pausa");
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("Gen2", 2).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("gen2", 2).get(i));
+        }
+        System.out.println("pausa");
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("Pel1", 3).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("Pel1", 3).get(i));
+        }
+        System.out.println("pausa");
+        for (int i = 0; i < gesPel.buscarPorClaveSecundaria("Pel2", 3).size(); i++) {
+            System.out.println(gesPel.buscarPorClaveSecundaria("Pel2", 3).get(i));
+        }
     }
 
 }

@@ -103,14 +103,42 @@ public class GestorCompras extends Gestor {
     }
 
     @Override
-    public String buscarPorId() {
-        String resultado = "";
-        return resultado;
+    public String buscarPorId(Long id) {
+        return compras.get(id).toString();
     }
 
     @Override
-    public ArrayList buscarPorClaveSecunddaria() {
-        ArrayList resultados = new ArrayList<Compra>();
-        return resultados;
+    public ArrayList<String> buscarPorClaveSecundaria(String Clave, int Option) {
+        ArrayList <String> filtrado = new ArrayList<>();
+
+        for (Long id : compras.keySet()) {
+            if (compras.get(id).getIdCliente() == Long.parseLong(Clave)) {
+                filtrado.add(id + " " + compras.get(id).toString());
+            }
+        }
+        if (filtrado.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No se encontraron compras");
+        }
+        return filtrado;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        
+        GestorCompras gesCom = new GestorCompras("PruebaCompras");
+        gesCom.agregar(new Compra(1, 1, 1, "29/12/2005"));
+        gesCom.agregar(new Compra(2, 1, 2, "29/12/2006"));
+        gesCom.agregar(new Compra(3, 1, 1, "29/12/2008"));
+        gesCom.agregar(new Compra(4, 1, 2, "29/12/2009"));
+        gesCom.agregar(new Compra(5, 5, 1, "29/11/2005"));
+        gesCom.agregar(new Compra(6, 6, 2, "29/11/2006"));
+        gesCom.agregar(new Compra(7, 7, 1, "29/11/2007"));
+        gesCom.agregar(new Compra(8, 8, 2, "29/11/2008"));
+        gesCom.agregar(new Compra(9, 9, 1, "29/11/2009"));
+        gesCom.agregar(new Compra(10, 10, 2, "29/07/2007"));
+        
+        gesCom.buscarPorId((long)5);
+        for (String com : gesCom.buscarPorClaveSecundaria("1", 0)){
+            System.out.println(com);
+        }
     }
 }
