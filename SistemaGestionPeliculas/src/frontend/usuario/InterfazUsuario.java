@@ -6,6 +6,7 @@ package frontend.usuario;
 
 import backend.Compra;
 import backend.Pelicula;
+import static frontend.Login.cliente;
 import static frontend.Login.gestorCompras;
 import static frontend.Login.gestorPeliculas;
 import java.time.LocalDate;

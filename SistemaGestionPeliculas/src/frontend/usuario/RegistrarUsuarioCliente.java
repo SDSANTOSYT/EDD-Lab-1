@@ -7,6 +7,7 @@ package frontend.usuario;
 import backend.Cliente;
 import static frontend.Login.gestorCliente;
 import java.io.IOException;
+import static frontend.Login.cliente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
