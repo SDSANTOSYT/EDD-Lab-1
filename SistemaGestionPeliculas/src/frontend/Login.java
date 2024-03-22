@@ -12,6 +12,7 @@ import backend.Reporte;
 import frontend.admin.InterfazAdmin;
 import frontend.usuario.InterfazUsuario;
 import frontend.usuario.RegistrarUsuarioCliente;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -91,7 +92,7 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 420, 150, 50));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/usuario/media/fondoLogin.png"))); // NOI18N
+        lblBackground.setIcon(new ImageIcon("src/frontend/usuario/media/fondoLogin.png"));
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
         pack();
