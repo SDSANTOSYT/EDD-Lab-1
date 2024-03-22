@@ -20,6 +20,9 @@ public class GestorClientes extends Gestor {
     public GestorClientes(String ruta) {
         this.ruta = ruta;
         crear(this.ruta);
+        for (String linea : leer()) {
+            clientes.put(Long.valueOf(linea.split(",")[0]), new Cliente(linea));
+        }
     }
 
     public HashMap<Long, Cliente> getClientes() {
