@@ -47,6 +47,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblContraseña = new javax.swing.JLabel();
@@ -58,32 +59,47 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(71, 160, 209));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 160, 209)));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 80));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(242, 167, 48));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("<html><center>Inicio de Sesión</center></html>");
-        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 400, 100));
+        lblTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(71, 160, 209)));
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 80));
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 300, 80));
+
+        lblUsuario.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 20)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuario.setText("Usuario: ");
         lblUsuario.setMaximumSize(new java.awt.Dimension(150, 30));
         lblUsuario.setMinimumSize(new java.awt.Dimension(150, 30));
         lblUsuario.setPreferredSize(new java.awt.Dimension(140, 30));
         getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 140, 30));
 
-        lblContraseña.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblContraseña.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 20)); // NOI18N
+        lblContraseña.setForeground(new java.awt.Color(255, 255, 255));
         lblContraseña.setText("Contraseña: ");
         lblContraseña.setMaximumSize(new java.awt.Dimension(150, 30));
         lblContraseña.setMinimumSize(new java.awt.Dimension(150, 30));
         lblContraseña.setPreferredSize(new java.awt.Dimension(140, 30));
         getContentPane().add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, 30));
 
+        tFieldUsuario.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         tFieldUsuario.setPreferredSize(new java.awt.Dimension(140, 30));
         getContentPane().add(tFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 160, 30));
 
+        pFieldContraseña.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         pFieldContraseña.setPreferredSize(new java.awt.Dimension(140, 30));
         getContentPane().add(pFieldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 160, 30));
 
-        btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnIngresar.setBackground(new java.awt.Color(71, 160, 209));
+        btnIngresar.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 20)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(242, 167, 48));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,13 +195,16 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                Login lg = new Login();
+                lg.setLocationRelativeTo(null);
+                lg.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblTitulo;

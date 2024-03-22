@@ -15,6 +15,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
      */
     public InterfazAdmin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

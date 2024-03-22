@@ -137,9 +137,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelNavegable.setBackground(new java.awt.Color(230, 230, 230));
         panelNavegable.setPreferredSize(new java.awt.Dimension(91, 645));
         panelNavegable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        botonBusqueda.setBackground(new java.awt.Color(230, 230, 230));
         botonBusqueda.setIcon(new ImageIcon("src/frontend/usuario/media/iconoBusqueda.png"));
         botonBusqueda.setBorder(null);
         botonBusqueda.setPreferredSize(new java.awt.Dimension(84, 84));
@@ -150,6 +152,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         });
         panelNavegable.add(botonBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, -1, -1));
 
+        botonCatalogo.setBackground(new java.awt.Color(230, 230, 230));
         botonCatalogo.setIcon(new ImageIcon("src/frontend/usuario/media/iconoCatalogo.png"));
         botonCatalogo.setBorder(null);
         botonCatalogo.setPreferredSize(new java.awt.Dimension(84, 84));
@@ -160,6 +163,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         });
         panelNavegable.add(botonCatalogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
 
+        botonCarrito.setBackground(new java.awt.Color(230, 230, 230));
         botonCarrito.setIcon(new ImageIcon("src/frontend/usuario/media/iconoCarrito.png"));
         botonCarrito.setBorder(null);
         botonCarrito.setPreferredSize(new java.awt.Dimension(84, 84));
@@ -170,32 +174,27 @@ public class InterfazUsuario extends javax.swing.JFrame {
         });
         panelNavegable.add(botonCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 465, -1, -1));
 
-        panelFondo.add(panelNavegable, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 37, 90, -1));
+        panelFondo.add(panelNavegable, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 50, 90, 620));
 
         panelTitulo.setBackground(new java.awt.Color(71, 160, 209));
         panelTitulo.setPreferredSize(new java.awt.Dimension(667, 102));
+        panelTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titulo.setBackground(new java.awt.Color(242, 167, 48));
         titulo.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 54)); // NOI18N
         titulo.setForeground(new java.awt.Color(242, 167, 48));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("<html><center>CATALOGO</center></html>");
+        panelTitulo.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 667, 102));
 
-        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
-        panelTitulo.setLayout(panelTituloLayout);
-        panelTituloLayout.setHorizontalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-        );
-        panelTituloLayout.setVerticalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-        );
+        panelFondo.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 50, -1, -1));
 
-        panelFondo.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 47, -1, -1));
-
+        panelTabla.setBackground(new java.awt.Color(230, 230, 230));
         panelTabla.setPreferredSize(new java.awt.Dimension(1057, 373));
 
+        jScrollPane1.setBackground(new java.awt.Color(230, 230, 230));
+
+        tablaPeliculas.setBackground(new java.awt.Color(230, 230, 230));
         tablaPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
