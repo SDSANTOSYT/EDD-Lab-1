@@ -21,6 +21,7 @@ public class GestorPeliculas extends Gestor {
     public GestorPeliculas(String ruta) {
         this.ruta = ruta;
         crear(this.ruta);
+        leer();
     }
 
     public HashMap<Long, Pelicula> getPeliculas() {

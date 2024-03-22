@@ -278,6 +278,7 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
                 Cliente cli = new Cliente(id, nombre, email, direccion, 0);
                 try {
                     gestorCliente.agregar(cli);
+                    cliente = cli;
                     InterfazUsuario i = new InterfazUsuario();
                     i.setVisible(true);
                     this.dispose();

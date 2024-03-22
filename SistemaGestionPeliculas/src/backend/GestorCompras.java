@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class GestorCompras extends Gestor {
 
     private HashMap<Long, Compra> compras = new HashMap<>();
+    private int numCompras = 0;
 
     public GestorCompras() {
     }
@@ -20,6 +21,8 @@ public class GestorCompras extends Gestor {
     public GestorCompras(String ruta) {
         this.ruta = ruta;
         crear(this.ruta);
+        leer();
+        numCompras = compras.size();
     }
 
     public HashMap<Long, Compra> getCompras() {
@@ -40,6 +43,8 @@ public class GestorCompras extends Gestor {
 
     public void agregar(Compra com) throws IOException {
         leer();
+        com.setIdCompra(numCompras);
+        numCompras++;
         if (compras.containsKey(com.getIdCompra())) {
             JOptionPane.showMessageDialog(null, "La compra ya se encuentra registrada.", "ERROR", 0);
         } else {
