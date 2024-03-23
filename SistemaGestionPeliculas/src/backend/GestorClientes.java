@@ -106,15 +106,29 @@ public class GestorClientes extends Gestor {
     }
 
     @Override
-    public String buscarPorId() {
-        String resultado = "";
-        return resultado;
+    public String buscarPorId(Long id) {
+        return clientes.get(id).toString();
     }
 
     @Override
-    public ArrayList buscarPorClaveSecunddaria() {
-        ArrayList resultados = new ArrayList<Cliente>();
-        return resultados;
+    public ArrayList buscarPorClaveSecundaria(String Clave, int Option) {
+        return null;
     }
-
+    
+    public static void main(String[] args) throws IOException {
+        
+        GestorClientes gesCli = new GestorClientes("PruebaClientes");
+        gesCli.agregar(new Cliente(1, "n1", "e1", "d1", 1));
+        gesCli.agregar(new Cliente(2, "n2", "e2", "d2", 1));
+        gesCli.agregar(new Cliente(3, "n3", "e3", "d3", 1));
+        gesCli.agregar(new Cliente(4, "n4", "e4", "d4", 1));
+        gesCli.agregar(new Cliente(5, "n5", "e5", "d5", 1));
+        gesCli.agregar(new Cliente(6, "n6", "e6", "d6", 1));
+        gesCli.agregar(new Cliente(7, "n7", "e7", "d7", 1));
+        gesCli.agregar(new Cliente(8, "n8", "e8", "d8", 1));
+        gesCli.agregar(new Cliente(9, "n9", "e9", "d9", 1));
+        gesCli.agregar(new Cliente(10, "n10", "e10", "d10", 1));
+        
+        System.out.println(gesCli.buscarPorId((long)5));
+    }
 }
