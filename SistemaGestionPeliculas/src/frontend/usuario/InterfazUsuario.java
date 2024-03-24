@@ -9,11 +9,13 @@ import backend.Pelicula;
 import static frontend.Login.cliente;
 import static frontend.Login.gestorCompras;
 import static frontend.Login.gestorPeliculas;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,6 +42,21 @@ public class InterfazUsuario extends javax.swing.JFrame {
         model.setColumnIdentifiers(nombresColumnas);
         for (Pelicula pelicula : listaPeliculas) {
             model.addRow(new Object[]{pelicula.getId(),pelicula.getTitulo(),pelicula.getDirector(),pelicula.getYear(),pelicula.getGenero(),pelicula.getPrecio()});
+        }
+        tablaPeliculas.setModel(model);
+    }
+    
+    public void rellenarTablaBusquedas(ArrayList<String> peliculas){
+        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        model.setColumnIdentifiers(nombresColumnas);
+        for (String Datospelicula : peliculas) {
+            model.addRow(new Object[]{Datospelicula.split(",")[0],Datospelicula.split(",")[1],Datospelicula.split(",")[2],Datospelicula.split(",")[3],Datospelicula.split(",")[4],Datospelicula.split(",")[5]});
         }
         tablaPeliculas.setModel(model);
     }
@@ -116,6 +133,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         panelFondo = new FondoPanel();
+        tituloNumeroEnCarrito = new javax.swing.JLabel();
         panelNavegable = new javax.swing.JPanel();
         botonBusqueda = new javax.swing.JButton();
         botonCatalogo = new javax.swing.JButton();
@@ -136,6 +154,13 @@ public class InterfazUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tituloNumeroEnCarrito.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tituloNumeroEnCarrito.setForeground(new java.awt.Color(51, 0, 255));
+        tituloNumeroEnCarrito.setLabelFor(botonCarrito);
+        tituloNumeroEnCarrito.setText("<html><html>");
+        tituloNumeroEnCarrito.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelFondo.add(tituloNumeroEnCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 510, 30, 20));
 
         panelNavegable.setBackground(new java.awt.Color(230, 230, 230));
         panelNavegable.setPreferredSize(new java.awt.Dimension(91, 645));
@@ -252,6 +277,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
         botonBuscarPorTitulo.setForeground(new java.awt.Color(227, 145, 12));
         botonBuscarPorTitulo.setText("<html><center> BUSCAR POR <br>TITULO");
         botonBuscarPorTitulo.setPreferredSize(new java.awt.Dimension(216, 70));
+        botonBuscarPorTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarPorTituloActionPerformed(evt);
+            }
+        });
         panelFondo.add(botonBuscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 600, -1, -1));
 
         botonBuscarPorGenero.setBackground(new java.awt.Color(46, 137, 187));
@@ -259,6 +289,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
         botonBuscarPorGenero.setForeground(new java.awt.Color(220, 140, 13));
         botonBuscarPorGenero.setText("<html><center> BUSCAR POR <br>GENERO");
         botonBuscarPorGenero.setPreferredSize(new java.awt.Dimension(216, 70));
+        botonBuscarPorGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarPorGeneroActionPerformed(evt);
+            }
+        });
         panelFondo.add(botonBuscarPorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 600, -1, -1));
 
         botonBuscarPorDirector.setBackground(new java.awt.Color(46, 137, 187));
@@ -266,6 +301,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
         botonBuscarPorDirector.setForeground(new java.awt.Color(220, 140, 13));
         botonBuscarPorDirector.setText("<html><center> BUSCAR POR DIRECTOR");
         botonBuscarPorDirector.setPreferredSize(new java.awt.Dimension(216, 70));
+        botonBuscarPorDirector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarPorDirectorActionPerformed(evt);
+            }
+        });
         panelFondo.add(botonBuscarPorDirector, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 600, -1, -1));
 
         botonEliminar.setBackground(new java.awt.Color(46, 137, 187));
@@ -320,7 +360,6 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
         // TODO add your handling code here:
-
         mostrarBuscar();
     }//GEN-LAST:event_botonBusquedaActionPerformed
 
@@ -339,6 +378,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         try {
             long id =  (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
             peliculasEnCarrito.add(gestorPeliculas.getPeliculas().get(id));
+            tituloNumeroEnCarrito.setText(String.valueOf(peliculasEnCarrito.size()));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -349,6 +389,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         try {
             long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
             peliculasEnCarrito.add(gestorPeliculas.getPeliculas().get(id));
+            tituloNumeroEnCarrito.setText(String.valueOf(peliculasEnCarrito.size()));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -374,10 +415,59 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
             peliculasEnCarrito.removeAll(peliculasEnCarrito);
             rellenarTablaCarrito();
+            tituloNumeroEnCarrito.setText("");
         } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_botonFinalizarCompraActionPerformed
+
+    private void botonBuscarPorTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPorTituloActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> pelis = new ArrayList<>();
+        try {
+            String titulo = JOptionPane.showInputDialog(this, "Ingrese el titulo de la pelicula que busca", "Buscar por titulo", 3);
+            if (titulo != null) {
+                pelis = gestorPeliculas.buscarPorClaveSecundaria(titulo, 3);
+                rellenarTablaBusquedas(pelis);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe escribir algo en el buscador", "ERROR", 0);
+            }
+        } catch (HeadlessException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_botonBuscarPorTituloActionPerformed
+
+    private void botonBuscarPorGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPorGeneroActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> pelis = new ArrayList<>();
+        try {
+            String genero = JOptionPane.showInputDialog(this, "Ingrese el genero de la pelicula que busca", "Buscar por genero", 3);
+            if (genero != null) {
+                pelis = gestorPeliculas.buscarPorClaveSecundaria(genero, 2);
+                rellenarTablaBusquedas(pelis);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe escribir algo en el buscador", "ERROR", 0);
+            } 
+        } catch (HeadlessException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_botonBuscarPorGeneroActionPerformed
+
+    private void botonBuscarPorDirectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPorDirectorActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> pelis = new ArrayList<>();
+        try {
+            String genero = JOptionPane.showInputDialog(this, "Ingrese el director de la pelicula que busca", "Buscar por director", 3);
+            if (genero != null) {
+                pelis = gestorPeliculas.buscarPorClaveSecundaria(genero, 1);
+                rellenarTablaBusquedas(pelis);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe escribir algo en el buscador", "ERROR", 0);
+            } 
+        } catch (HeadlessException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_botonBuscarPorDirectorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,5 +523,6 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JTable tablaPeliculas;
     private javax.swing.JLabel titulo;
+    private javax.swing.JLabel tituloNumeroEnCarrito;
     // End of variables declaration//GEN-END:variables
 }
