@@ -14,9 +14,6 @@ import javax.swing.JOptionPane;
  * @author sebas
  */
 public class InterfazAdmin extends javax.swing.JFrame {
-    public static GestorClientes gestorCliente;
-    public static GestorCompras gestorCompras;
-    public static Compra compra;
 
     /**
      * Creates new form InterfazAdmin
@@ -121,6 +118,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         ID = null;
         ID = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente que busca", "Buscar por ID", 3);
         new InterfazResultado().setVisible(true);
+        this.dispose();
         //this.setVisible(false);
 
     }//GEN-LAST:event_ClienteButtonActionPerformed
@@ -129,6 +127,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         ID = null;
         ID = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente que busca", "Buscar por ID", 3);
         new InterfazResultadoComp().setVisible(true);
+        this.dispose();
         //this.setVisible(false);
 
 

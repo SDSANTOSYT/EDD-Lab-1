@@ -5,10 +5,9 @@
 package frontend.admin;
 
 import backend.Cliente;
-import backend.GestorClientes;
-import backend.GestorCompras;
+import static frontend.Login.gestorCliente;
+import static frontend.Login.gestorCompras;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,7 +46,7 @@ public class InterfazResultado extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        ArrayList<String> compras = InterfazAdmin.gestorCompras.buscarPorClaveSecundaria(InterfazAdmin.ID, 1);
+        ArrayList<String> compras = gestorCompras.buscarPorClaveSecundaria(InterfazAdmin.ID, 1);
         if (compras.size() != 0) {
             for (String compra : compras) {
                 model.addRow(new Object[]{compra.split(",")[0], compra.split(",")[1], compra.split(",")[2], compra.split(",")[3].substring(0, 9)});
@@ -223,25 +222,25 @@ public class InterfazResultado extends javax.swing.JFrame {
         CompraButton.setVisible(false);
         CompraText.setVisible(false);
         ScrollCompras.setVisible(true);
-        rellenarTablaCompras((InterfazAdmin.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))));
+        rellenarTablaCompras((gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))));
 
     }//GEN-LAST:event_CompraButtonActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
         ScrollCompras.setVisible(false);
-        if ((InterfazAdmin.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
-            rellenarTabla(InterfazAdmin.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID)));
-            
+        if ((gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
+            rellenarTabla(gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID)));
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido encontrado", "Error", HEIGHT);
-            this.setVisible(false);
+            this.dispose();
             new InterfazAdmin().setVisible(true);
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
-        this.setVisible(false);
+        this.dispose();
         new InterfazAdmin().setVisible(true);
     }//GEN-LAST:event_VolverButtonActionPerformed
 

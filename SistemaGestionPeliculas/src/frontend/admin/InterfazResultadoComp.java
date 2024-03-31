@@ -4,12 +4,8 @@
  */
 package frontend.admin;
 
-import backend.Cliente;
 import backend.Compra;
-import backend.GestorClientes;
-import backend.GestorCompras;
-import java.util.ArrayList;
-import java.util.List;
+import static frontend.Login.gestorCompras;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
  * @author orlandopalma
  */
 public class InterfazResultadoComp extends javax.swing.JFrame {
-
 
     /**
      * Creates new form InterfazResultado
@@ -162,17 +157,17 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
         tablaCompras.setVisible(false);
-        if ((InterfazAdmin.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
-            rellenarTabla(InterfazAdmin.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID)));
+        if ((gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
+            rellenarTabla(gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID)));
         } else {
             JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido encontrado", "Error", HEIGHT);
-            this.setVisible(false);
+            this.dispose();
             new InterfazAdmin().setVisible(true);
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
-        this.setVisible(false);
+        this.dispose();
         new InterfazAdmin().setVisible(true);
     }//GEN-LAST:event_VolverButtonActionPerformed
 
