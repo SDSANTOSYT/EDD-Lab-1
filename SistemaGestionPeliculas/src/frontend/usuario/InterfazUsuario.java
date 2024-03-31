@@ -210,7 +210,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         titulo.setForeground(new java.awt.Color(242, 167, 48));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("<html><center>CATALOGO</center></html>");
-        panelTitulo.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 667, 102));
+        panelTitulo.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 667, 102));
 
         panelFondo.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 50, -1, -1));
 
@@ -282,7 +282,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 botonBuscarPorTituloActionPerformed(evt);
             }
         });
-        panelFondo.add(botonBuscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 600, -1, -1));
+        panelFondo.add(botonBuscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -30, -1, -1));
 
         botonBuscarPorGenero.setBackground(new java.awt.Color(46, 137, 187));
         botonBuscarPorGenero.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 20)); // NOI18N
