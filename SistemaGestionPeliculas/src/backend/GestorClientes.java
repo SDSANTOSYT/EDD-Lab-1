@@ -80,8 +80,9 @@ public class GestorClientes extends Gestor {
             for (Map.Entry<Long, Cliente> cliente : clientes.entrySet()) {
                 Cliente value = cliente.getValue();
                 bw.write(value.toString());
-                bw.close();
+                
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Cliente actualizado con exito.", "Actualizar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "El cliente no se encuentra registrado.", "ERROR", 0);

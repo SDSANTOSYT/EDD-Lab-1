@@ -295,7 +295,7 @@ public class VerClientes extends javax.swing.JFrame {
                         if (email != null) {
                             direccion = JOptionPane.showInputDialog("Ingrese la dirección: ", Login.gestorCliente.getClientes().get(id).getDireccion());
                             if (direccion != null) {
-                                Login.gestorCliente.actualizar(id, nombre + "," + email + "," + direccion + "," + Login.gestorCliente.getClientes().get(id).getNumeroDeCompras() + "\n");
+                                Login.gestorCliente.actualizar(id, nombre + "," + email + "," + direccion + "," + Login.gestorCliente.getClientes().get(id).getNumeroDeCompras());
                                 rellenarTabla();
                             }
                         }

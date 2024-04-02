@@ -100,7 +100,7 @@ public class VerCompras extends javax.swing.JFrame {
         tablaCompras.setShowGrid(false);
         ScrollCliente.setViewportView(tablaCompras);
 
-        jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 240));
+        jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, 240));
 
         titulo1.setBackground(new java.awt.Color(242, 167, 48));
         titulo1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N

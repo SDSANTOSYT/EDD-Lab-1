@@ -11,6 +11,10 @@ import backend.GestorCompras;
 import backend.Pelicula;
 import frontend.Login;
 import static frontend.Login.gestorPeliculas;
+import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,18 +33,18 @@ public class VerPeliculas extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void rellenarTabla(){
-        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
+    public void rellenarTabla() {
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio"};
         List<Pelicula> listaPeliculas = new ArrayList<>(gestorPeliculas.getPeliculas().values());
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
         for (Pelicula pelicula : listaPeliculas) {
-            model.addRow(new Object[]{pelicula.getId(),pelicula.getTitulo(),pelicula.getDirector(),pelicula.getYear(),pelicula.getGenero(),pelicula.getPrecio()});
+            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio()});
         }
         tablaPeliculas.setModel(model);
     }
@@ -57,6 +61,12 @@ public class VerPeliculas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         ScrollCliente = new javax.swing.JScrollPane();
         tablaPeliculas = new javax.swing.JTable();
+        EliminarText = new javax.swing.JLabel();
+        ActualizarText = new javax.swing.JLabel();
+        AgregarText = new javax.swing.JLabel();
+        ActualizarButton = new javax.swing.JButton();
+        EliminarButton = new javax.swing.JButton();
+        AgregarButton = new javax.swing.JButton();
         titulo1 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
         panelTitulo = new javax.swing.JPanel();
@@ -100,7 +110,55 @@ public class VerPeliculas extends javax.swing.JFrame {
         tablaPeliculas.setShowGrid(false);
         ScrollCliente.setViewportView(tablaPeliculas);
 
-        jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 240));
+        jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 240));
+
+        EliminarText.setBackground(new java.awt.Color(242, 167, 48));
+        EliminarText.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
+        EliminarText.setForeground(new java.awt.Color(242, 167, 48));
+        EliminarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EliminarText.setText("Eliminar");
+        jPanel1.add(EliminarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 200, 50));
+
+        ActualizarText.setBackground(new java.awt.Color(242, 167, 48));
+        ActualizarText.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
+        ActualizarText.setForeground(new java.awt.Color(242, 167, 48));
+        ActualizarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ActualizarText.setText("Actualizar");
+        jPanel1.add(ActualizarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 200, 50));
+
+        AgregarText.setBackground(new java.awt.Color(242, 167, 48));
+        AgregarText.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
+        AgregarText.setForeground(new java.awt.Color(242, 167, 48));
+        AgregarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AgregarText.setText("Agregar ");
+        jPanel1.add(AgregarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 200, 50));
+
+        ActualizarButton.setBackground(new java.awt.Color(71, 160, 209));
+        ActualizarButton.setBorder(null);
+        ActualizarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ActualizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 160, 50));
+
+        EliminarButton.setBackground(new java.awt.Color(71, 160, 209));
+        EliminarButton.setBorder(null);
+        EliminarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EliminarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 160, 50));
+
+        AgregarButton.setBackground(new java.awt.Color(71, 160, 209));
+        AgregarButton.setBorder(null);
+        AgregarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AgregarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 160, 50));
 
         titulo1.setBackground(new java.awt.Color(242, 167, 48));
         titulo1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
@@ -160,13 +218,125 @@ public class VerPeliculas extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         rellenarTabla();
-    
+
     }//GEN-LAST:event_formWindowOpened
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
         this.setVisible(false);
         new InterfazAdmin().setVisible(true);
     }//GEN-LAST:event_VolverButtonActionPerformed
+
+    private void ActualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtonActionPerformed
+        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
+        Long id;
+        String titulo;
+        String director;
+        int year;
+        String genero;
+        double precio;
+        int numeroDeVentas;
+        if (idStr != null) {
+            id = Long.valueOf(idStr);
+            if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
+                JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " no existe", "Error", 0);
+            } else {
+                id = Long.parseLong(idStr);
+                try {
+                        titulo = JOptionPane.showInputDialog("Ingrese el título: ", Login.gestorPeliculas.getPeliculas().get(id).getTitulo());
+                        if (titulo != null) {
+                            director = JOptionPane.showInputDialog("Ingrese el director: ", Login.gestorPeliculas.getPeliculas().get(id).getDirector());
+                            if (director != null) {
+                                String yearStr = JOptionPane.showInputDialog("Ingrese el año: ", Login.gestorPeliculas.getPeliculas().get(id).getYear());
+                                if (yearStr != null) {
+                                    year = Integer.parseInt(yearStr);
+                                    String generoStr = JOptionPane.showInputDialog("Ingrese el género: ", Login.gestorPeliculas.getPeliculas().get(id).getGenero());
+                                    if (generoStr != null) {
+                                        genero = generoStr;
+                                        String precioStr = JOptionPane.showInputDialog("Ingrese el precio: ", Login.gestorPeliculas.getPeliculas().get(id).getPrecio());
+                                        if (precioStr != null) {
+                                            precio = Double.parseDouble(precioStr);
+                                            Login.gestorPeliculas.actualizar(id, titulo + "," + director + "," + year + "," + genero + "," + precio + "," + Login.gestorPeliculas.getPeliculas().get(id).getNumeroDeVentas());
+                                            rellenarTabla();
+                                        }
+                                    }
+                                }
+                            }
+                        
+
+                    }
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_ActualizarButtonActionPerformed
+
+    private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
+
+        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
+        Long id;
+        String titulo;
+        String director;
+        int year;
+        String genero;
+        double precio;
+        int numeroDeVentas;
+        if (idStr
+                == null) {
+        } else {
+            try {
+                id = Long.parseLong(idStr);
+                if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
+                    titulo = JOptionPane.showInputDialog("Ingrese el título: ");
+                    if (titulo != null) {
+                        director = JOptionPane.showInputDialog("Ingrese el director: ");
+                        if (director != null) {
+                            String yearStr = JOptionPane.showInputDialog("Ingrese el año: ");
+                            if (yearStr != null) {
+                                year = Integer.parseInt(yearStr);
+                                String generoStr = JOptionPane.showInputDialog("Ingrese el género: ");
+                                if (generoStr != null) {
+                                    genero = generoStr;
+                                    String precioStr = JOptionPane.showInputDialog("Ingrese el precio: ");
+                                    if (precioStr != null) {
+                                        precio = Double.parseDouble(precioStr);
+                                        Pelicula peli = new Pelicula(id, titulo, director, year, genero, precio, 0);
+                                        Login.gestorPeliculas.agregar(peli);
+                                        rellenarTabla();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }//GEN-LAST:event_AgregarButtonActionPerformed
+
+    private void EliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarButtonActionPerformed
+        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
+        if (idStr != null) {
+            Long id = Long.valueOf(idStr);
+            if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
+                JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " no existe", "Error", 0);
+            } else {
+                try {
+                    Login.gestorPeliculas.eliminar(id);
+                } catch (IOException ex) {
+                    java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                rellenarTabla();
+
+            }
+        }
+    }//GEN-LAST:event_EliminarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,27 +353,23 @@ public class VerPeliculas extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VerPeliculas.class  
+            java.util.logging.Logger.getLogger(VerPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VerPeliculas.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VerPeliculas.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VerPeliculas.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -219,6 +385,12 @@ public class VerPeliculas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ActualizarButton;
+    private javax.swing.JLabel ActualizarText;
+    private javax.swing.JButton AgregarButton;
+    private javax.swing.JLabel AgregarText;
+    private javax.swing.JButton EliminarButton;
+    private javax.swing.JLabel EliminarText;
     private javax.swing.JScrollPane ScrollCliente;
     private javax.swing.JButton VolverButton;
     private javax.swing.JLabel jLabel1;
