@@ -11,6 +11,7 @@ import backend.GestorCompras;
 import backend.Pelicula;
 import frontend.Login;
 import static frontend.Login.gestorPeliculas;
+import frontend.usuario.RegistrarUsuarioCliente;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,11 @@ public class VerClientes extends javax.swing.JFrame {
     public VerClientes() {
         initComponents();
     }
+    public static boolean Abierto = false;
 
+    /**
+     *
+     */
     public void rellenarTabla() {
         String nombresColumnas[] = {"ID", "Nombre", "Email", "Dirección", "Número de Compras"};
         List<Cliente> listaClientes = new ArrayList<>(Login.gestorCliente.getClientes().values());
@@ -216,46 +221,20 @@ public class VerClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Abierto = true;
         rellenarTabla();
     }//GEN-LAST:event_formWindowOpened
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
         this.setVisible(false);
         new InterfazAdmin().setVisible(true);
+        Abierto = false;
     }//GEN-LAST:event_VolverButtonActionPerformed
 
     private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
 
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
-        Long id;
-        String nombre;
-        String email;
-        String direccion;
-        if (idStr == null) {
-        } else {
-            try {
-                id = Long.parseLong(idStr);
-                if (Login.gestorCliente.getClientes().get(id) == null) {
-                    nombre = JOptionPane.showInputDialog("Ingrese el nombre: ");
-                    if (nombre != null) {
-                        email = JOptionPane.showInputDialog("Ingrese el email: ");
-                        if (email != null) {
-                            direccion = JOptionPane.showInputDialog("Ingrese la dirección: ");
-                            if (direccion != null) {
-                                Cliente cli = new Cliente(id, nombre, email, direccion, 0);
-                                Login.gestorCliente.agregar(cli);
-                                rellenarTabla();
-                            }
-                        }
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Usuario con ID " + id + " ya existe", "Error", 0);
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error", "Error", 0);
-            }
-        }
-
+        new RegistrarUsuarioCliente().setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_AgregarButtonActionPerformed
 

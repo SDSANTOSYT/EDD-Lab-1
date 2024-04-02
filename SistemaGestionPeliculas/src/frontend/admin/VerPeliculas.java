@@ -34,7 +34,7 @@ public class VerPeliculas extends javax.swing.JFrame {
     }
 
     public void rellenarTabla() {
-        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio"};
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio","Numero de Ventas"};
         List<Pelicula> listaPeliculas = new ArrayList<>(gestorPeliculas.getPeliculas().values());
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -44,7 +44,7 @@ public class VerPeliculas extends javax.swing.JFrame {
         };
         model.setColumnIdentifiers(nombresColumnas);
         for (Pelicula pelicula : listaPeliculas) {
-            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio()});
+            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio(),pelicula.getNumeroDeVentas()});
         }
         tablaPeliculas.setModel(model);
     }
