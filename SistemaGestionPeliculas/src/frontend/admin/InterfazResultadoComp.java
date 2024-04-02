@@ -4,7 +4,6 @@
  */
 package frontend.admin;
 
-import backend.Cliente;
 import backend.Compra;
 import backend.GestorClientes;
 import backend.GestorCompras;
@@ -166,6 +165,7 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
             rellenarTabla(Login.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID)));
         } else {
             JOptionPane.showMessageDialog(rootPane, "La compra no ha sido encontrada", "Error", HEIGHT);
+
             this.dispose();
             new InterfazAdmin().setVisible(true);
         }

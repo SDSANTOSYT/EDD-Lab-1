@@ -5,11 +5,12 @@
 package frontend.admin;
 
 import backend.Cliente;
+
 import backend.GestorClientes;
 import backend.GestorCompras;
 import frontend.Login;
+
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,6 +50,7 @@ public class InterfazResultado extends javax.swing.JFrame {
         };
         model.setColumnIdentifiers(nombresColumnas);
         ArrayList<String> compras = Login.gestorCompras.buscarPorClaveSecundaria(InterfazAdmin.ID, 1);
+
         if (compras.size() != 0) {
             for (String compra : compras) {
                 model.addRow(new Object[]{compra.split(",")[0], compra.split(",")[1], compra.split(",")[2], compra.split(",")[3].substring(0, 9)});
@@ -224,11 +226,13 @@ public class InterfazResultado extends javax.swing.JFrame {
         ScrollCompras.setVisible(true);
         rellenarTablaCompras((Login.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))));
 
+
     }//GEN-LAST:event_CompraButtonActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
         ScrollCompras.setVisible(false);
+
             String nombresColumnas[] = {"ID", "Nombre", "Email", "Dirección", "Número de Compras"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(nombresColumnas);
@@ -240,6 +244,7 @@ public class InterfazResultado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido encontrado", "Error", HEIGHT);
            this.dispose();
            new InterfazAdmin().setVisible(true);
+
         }
     }//GEN-LAST:event_formWindowOpened
 

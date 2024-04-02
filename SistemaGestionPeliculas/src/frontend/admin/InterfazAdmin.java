@@ -214,16 +214,17 @@ public class InterfazAdmin extends javax.swing.JFrame {
             new InterfazResultado().setVisible(true);
             this.dispose();
         }
+
     }//GEN-LAST:event_ClienteButtonActionPerformed
 
     private void CompraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompraButtonActionPerformed
         ID = null;
-        ID = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente que busca", "Buscar por ID", 3);
-        if (ID == null) {
+        ID = JOptionPane.showInputDialog(this, "Ingrese el ID del cliente que busca", "Buscar por ID", 3);        if (ID == null) {
             JOptionPane.showMessageDialog(null, "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             new InterfazResultado().setVisible(true);
             this.dispose();
+
 
         }
 
