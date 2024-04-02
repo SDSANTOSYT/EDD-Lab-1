@@ -4,10 +4,13 @@
  */
 package frontend.admin;
 
+import backend.Cliente;
 import backend.Compra;
 import backend.GestorClientes;
 import backend.GestorCompras;
+import backend.Pelicula;
 import frontend.Login;
+import static frontend.Login.gestorPeliculas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,32 +20,29 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author orlandopalma
  */
-public class InterfazResultadoComp extends javax.swing.JFrame {
+public class VerPeliculas extends javax.swing.JFrame {
 
     /**
      * Creates new form InterfazResultado
      */
-    public InterfazResultadoComp() {
+    public VerPeliculas() {
         initComponents();
     }
 
-    public void rellenarTabla(Compra compra) {
-        String nombresColumnas[] = {"ID Compra", "ID Cliente", "ID Película", "Fecha"};
-        DefaultTableModel model = new DefaultTableModel() {
+    public void rellenarTabla(){
+        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
+        List<Pelicula> listaPeliculas = new ArrayList<>(gestorPeliculas.getPeliculas().values());
+        DefaultTableModel model = new DefaultTableModel(){
             @Override
-            public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column){
                 return false;
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        if (compra != null) {
-            model.addRow(new Object[]{compra.getIdCompra(), compra.getIdCliente(), compra.getIdPelicula(), compra.getFecha()});
-
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "La compra no ha sido encontrada", "Error", HEIGHT);
+        for (Pelicula pelicula : listaPeliculas) {
+            model.addRow(new Object[]{pelicula.getId(),pelicula.getTitulo(),pelicula.getDirector(),pelicula.getYear(),pelicula.getGenero(),pelicula.getPrecio()});
         }
-
-        tablaCompras.setModel(model);
+        tablaPeliculas.setModel(model);
     }
 
     /**
@@ -55,8 +55,8 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaCompras = new javax.swing.JTable();
+        ScrollCliente = new javax.swing.JScrollPane();
+        tablaPeliculas = new javax.swing.JTable();
         titulo1 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
         panelTitulo = new javax.swing.JPanel();
@@ -75,10 +75,10 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane3.setBackground(new java.awt.Color(230, 230, 230));
+        ScrollCliente.setBackground(new java.awt.Color(230, 230, 230));
 
-        tablaCompras.setBackground(new java.awt.Color(230, 230, 230));
-        tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPeliculas.setBackground(new java.awt.Color(230, 230, 230));
+        tablaPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -97,10 +97,10 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaCompras.setShowGrid(false);
-        jScrollPane3.setViewportView(tablaCompras);
+        tablaPeliculas.setShowGrid(false);
+        ScrollCliente.setViewportView(tablaPeliculas);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 80));
+        jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 240));
 
         titulo1.setBackground(new java.awt.Color(242, 167, 48));
         titulo1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 24)); // NOI18N
@@ -126,7 +126,7 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
         titulo2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 54)); // NOI18N
         titulo2.setForeground(new java.awt.Color(242, 167, 48));
         titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo2.setText("<html><center></center></html>");
+        titulo2.setText("<html><center>Peliculas</center></html>");
         panelTitulo.add(titulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 102));
 
         jPanel1.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 390, -1));
@@ -159,20 +159,12 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
-        tablaCompras.setVisible(false);
-        if ((Login.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
-            rellenarTabla(Login.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID)));
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "La compra no ha sido encontrada", "Error", HEIGHT);
-
-            this.dispose();
-            new InterfazAdmin().setVisible(true);
-        }
+        rellenarTabla();
+    
     }//GEN-LAST:event_formWindowOpened
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
-        this.dispose();
+        this.setVisible(false);
         new InterfazAdmin().setVisible(true);
     }//GEN-LAST:event_VolverButtonActionPerformed
 
@@ -190,35 +182,49 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazResultadoComp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazResultadoComp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazResultadoComp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazResultadoComp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerPeliculas.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VerPeliculas.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazResultadoComp().setVisible(true);
+                new VerPeliculas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollCliente;
     private javax.swing.JButton VolverButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JTable tablaCompras;
+    private javax.swing.JTable tablaPeliculas;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel titulo2;
     // End of variables declaration//GEN-END:variables

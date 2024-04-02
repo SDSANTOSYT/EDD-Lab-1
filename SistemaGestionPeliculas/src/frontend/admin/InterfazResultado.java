@@ -5,8 +5,11 @@
 package frontend.admin;
 
 import backend.Cliente;
-import static frontend.Login.gestorCliente;
-import static frontend.Login.gestorCompras;
+
+import backend.GestorClientes;
+import backend.GestorCompras;
+import frontend.Login;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,14 +49,13 @@ public class InterfazResultado extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        ArrayList<String> compras = gestorCompras.buscarPorClaveSecundaria(InterfazAdmin.ID, 1);
+        ArrayList<String> compras = Login.gestorCompras.buscarPorClaveSecundaria(InterfazAdmin.ID, 1);
+
         if (compras.size() != 0) {
             for (String compra : compras) {
                 model.addRow(new Object[]{compra.split(",")[0], compra.split(",")[1], compra.split(",")[2], compra.split(",")[3].substring(0, 9)});
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "El cliente no ha realizado ninguna compra", "Error", HEIGHT);
-        }
+        } 
 
         tablaCompras.setModel(model);
     }
@@ -69,9 +71,9 @@ public class InterfazResultado extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         ScrollCompras = new javax.swing.JScrollPane();
-        tablaCliente = new javax.swing.JTable();
-        ScrollCliente = new javax.swing.JScrollPane();
         tablaCompras = new javax.swing.JTable();
+        ScrollCliente = new javax.swing.JScrollPane();
+        tablaCliente = new javax.swing.JTable();
         titulo1 = new javax.swing.JLabel();
         CompraText = new javax.swing.JLabel();
         CompraButton = new javax.swing.JButton();
@@ -94,33 +96,6 @@ public class InterfazResultado extends javax.swing.JFrame {
 
         ScrollCompras.setBackground(new java.awt.Color(230, 230, 230));
 
-        tablaCliente.setBackground(new java.awt.Color(230, 230, 230));
-        tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tablaCliente.setShowGrid(false);
-        ScrollCompras.setViewportView(tablaCliente);
-
-        jPanel1.add(ScrollCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 160));
-
-        ScrollCliente.setBackground(new java.awt.Color(230, 230, 230));
-
         tablaCompras.setBackground(new java.awt.Color(230, 230, 230));
         tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +117,34 @@ public class InterfazResultado extends javax.swing.JFrame {
             }
         });
         tablaCompras.setShowGrid(false);
-        ScrollCliente.setViewportView(tablaCompras);
+        ScrollCompras.setViewportView(tablaCompras);
+
+        jPanel1.add(ScrollCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 160));
+
+        ScrollCliente.setBackground(new java.awt.Color(230, 230, 230));
+
+        tablaCliente.setBackground(new java.awt.Color(230, 230, 230));
+        tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaCliente.setShowGrid(false);
+        ScrollCliente.setViewportView(tablaCliente);
 
         jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 60));
 
@@ -222,20 +224,27 @@ public class InterfazResultado extends javax.swing.JFrame {
         CompraButton.setVisible(false);
         CompraText.setVisible(false);
         ScrollCompras.setVisible(true);
-        rellenarTablaCompras((gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))));
+        rellenarTablaCompras((Login.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))));
+
 
     }//GEN-LAST:event_CompraButtonActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
         ScrollCompras.setVisible(false);
-        if ((gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
-            rellenarTabla(gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID)));
 
+            String nombresColumnas[] = {"ID", "Nombre", "Email", "Dirección", "Número de Compras"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(nombresColumnas);
+        tablaCompras.setModel(model);
+        System.out.println("hola");
+        if ((Login.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
+            rellenarTabla(Login.gestorCliente.getClientes().get(Long.parseLong(InterfazAdmin.ID)));
         } else {
             JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido encontrado", "Error", HEIGHT);
-            this.dispose();
-            new InterfazAdmin().setVisible(true);
+           this.dispose();
+           new InterfazAdmin().setVisible(true);
+
         }
     }//GEN-LAST:event_formWindowOpened
 
