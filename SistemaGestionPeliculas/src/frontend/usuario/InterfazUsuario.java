@@ -27,57 +27,56 @@ public class InterfazUsuario extends javax.swing.JFrame {
     /**
      * Creates new form Catalogo
      */
-    
     public ArrayList<Pelicula> peliculasEnCarrito;
-    
-    public void rellenarTablaCatalogo(){
-        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
+
+    public void rellenarTablaCatalogo() {
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio"};
         List<Pelicula> listaPeliculas = new ArrayList<>(gestorPeliculas.getPeliculas().values());
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
         for (Pelicula pelicula : listaPeliculas) {
-            model.addRow(new Object[]{pelicula.getId(),pelicula.getTitulo(),pelicula.getDirector(),pelicula.getYear(),pelicula.getGenero(),pelicula.getPrecio()});
+            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio()});
         }
         tablaPeliculas.setModel(model);
     }
-    
-    public void rellenarTablaBusquedas(ArrayList<String> peliculas){
-        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
-        DefaultTableModel model = new DefaultTableModel(){
+
+    public void rellenarTablaBusquedas(ArrayList<String> peliculas) {
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio"};
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
         for (String Datospelicula : peliculas) {
-            model.addRow(new Object[]{Datospelicula.split(",")[0],Datospelicula.split(",")[1],Datospelicula.split(",")[2],Datospelicula.split(",")[3],Datospelicula.split(",")[4],Datospelicula.split(",")[5]});
+            model.addRow(new Object[]{Long.parseLong(Datospelicula.split(",")[0]), Datospelicula.split(",")[1], Datospelicula.split(",")[2], Datospelicula.split(",")[3], Datospelicula.split(",")[4], Datospelicula.split(",")[5]});
         }
         tablaPeliculas.setModel(model);
     }
-    
-    public void rellenarTablaCarrito(){
-        String nombresColumnas[] = {"ID","Titulo","Director","Año","Genero","Precio"};
+
+    public void rellenarTablaCarrito() {
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio"};
         List<Pelicula> listaPeliculas = peliculasEnCarrito;
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
         for (Pelicula pelicula : listaPeliculas) {
-            model.addRow(new Object[]{pelicula.getId(),pelicula.getTitulo(),pelicula.getDirector(),pelicula.getYear(),pelicula.getGenero(),pelicula.getPrecio()});
+            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio()});
         }
         tablaPeliculas.setModel(model);
-        
+
     }
-    
+
     public void mostrarCatalogo() {
         titulo.setText("CATALOGO");
         botonAgregarAlCarrito2.setVisible(false);
@@ -222,18 +221,22 @@ public class InterfazUsuario extends javax.swing.JFrame {
         tablaPeliculas.setBackground(new java.awt.Color(230, 230, 230));
         tablaPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -376,7 +379,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private void botonAgregarAlCarrito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAlCarrito1ActionPerformed
         // TODO add your handling code here:
         try {
-            long id =  (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
+            long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
             peliculasEnCarrito.add(gestorPeliculas.getPeliculas().get(id));
             tituloNumeroEnCarrito.setText(String.valueOf(peliculasEnCarrito.size()));
         } catch (Exception e) {
@@ -387,7 +390,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private void botonAgregarAlCarrito2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAlCarrito2ActionPerformed
         // TODO add your handling code here:
         try {
-            long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
+            long id = (long) (tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0));
             peliculasEnCarrito.add(gestorPeliculas.getPeliculas().get(id));
             tituloNumeroEnCarrito.setText(String.valueOf(peliculasEnCarrito.size()));
         } catch (Exception e) {
@@ -410,7 +413,8 @@ public class InterfazUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             for (Pelicula pelicula : peliculasEnCarrito) {
-                Compra com = new  Compra(0, cliente.getId(), pelicula.getId(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                Compra com = new Compra(0, cliente.getId(), pelicula.getId(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                gestorPeliculas.actualizar(pelicula.getId(), pelicula.getTitulo() + "," + pelicula.getDirector() + "," + pelicula.getYear() + "," + pelicula.getGenero() + "," + pelicula.getPrecio() + "," + (gestorPeliculas.getPeliculas().get(pelicula.getId()).getNumeroDeVentas() + 1));
                 gestorCompras.agregar(com);
             }
             peliculasEnCarrito.removeAll(peliculasEnCarrito);
@@ -447,7 +451,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 rellenarTablaBusquedas(pelis);
             } else {
                 JOptionPane.showMessageDialog(this, "Debe escribir algo en el buscador", "ERROR", 0);
-            } 
+            }
         } catch (HeadlessException e) {
             System.out.println(e);
         }
@@ -463,7 +467,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 rellenarTablaBusquedas(pelis);
             } else {
                 JOptionPane.showMessageDialog(this, "Debe escribir algo en el buscador", "ERROR", 0);
-            } 
+            }
         } catch (HeadlessException e) {
             System.out.println(e);
         }
