@@ -9,6 +9,7 @@ import static frontend.Login.gestorCliente;
 import java.io.IOException;
 import static frontend.Login.cliente;
 import static frontend.Login.user;
+import frontend.admin.VerClientes;
 import javax.swing.JOptionPane;
 
 /**
@@ -280,8 +281,13 @@ public class RegistrarUsuarioCliente extends javax.swing.JFrame {
                 try {
                     gestorCliente.agregar(cli);
                     cliente = cli;
-                    InterfazUsuario i = new InterfazUsuario();
-                    i.setVisible(true);
+                    if (!VerClientes.Abierto) {
+                        InterfazUsuario i = new InterfazUsuario();
+                        i.setVisible(true);
+                    }else{
+                        VerClientes.Abierto=false;
+                        new VerClientes().setVisible(true);
+                    }
                     this.dispose();
                 } catch (IOException ex) {
                     System.out.println(ex);

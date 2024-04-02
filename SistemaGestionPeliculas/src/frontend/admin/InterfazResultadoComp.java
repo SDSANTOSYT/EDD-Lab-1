@@ -35,13 +35,7 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        if (compra != null) {
-            model.addRow(new Object[]{compra.getIdCompra(), compra.getIdCliente(), compra.getIdPelicula(), compra.getFecha()});
-
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "La compra no ha sido encontrada", "Error", HEIGHT);
-        }
-
+        model.addRow(new Object[]{compra.getIdCompra(), compra.getIdCliente(), compra.getIdPelicula(), compra.getFecha()});
         tablaCompras.setModel(model);
     }
 
@@ -160,12 +154,10 @@ public class InterfazResultadoComp extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         titulo2.setText("<html><center>ID: " + InterfazAdmin.ID + "</center></html>");
-        tablaCompras.setVisible(false);
         if ((Login.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID))) != null && InterfazAdmin.ID != null) {
             rellenarTabla(Login.gestorCompras.getCompras().get(Long.parseLong(InterfazAdmin.ID)));
         } else {
             JOptionPane.showMessageDialog(rootPane, "La compra no ha sido encontrada", "Error", HEIGHT);
-
             this.dispose();
             new InterfazAdmin().setVisible(true);
         }
