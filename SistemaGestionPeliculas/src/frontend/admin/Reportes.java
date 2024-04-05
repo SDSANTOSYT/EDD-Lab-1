@@ -4,17 +4,10 @@
  */
 package frontend.admin;
 
-import backend.Cliente;
-import backend.Compra;
-import backend.GestorClientes;
-import backend.GestorCompras;
-import backend.Pelicula;
-import backend.Reporte;
 import frontend.Login;
 import static frontend.Login.gestorPeliculas;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -224,14 +224,14 @@ public class VerPeliculas extends javax.swing.JFrame {
                 if (genero == null || genero.isEmpty() || genero.isBlank()) {
                     genero = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 4);
                 }
-                String precio = JOptionPane.showInputDialog(null, "Ingrese el preicio de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
-                if (precio == null || precio.isEmpty() || precio.isBlank()) {
-                    precio = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 5);
+                double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el preicio de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE));
+                if (precio <= 0) {
+                    precio = (double) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 5);
                 }
                 Login.gestorPeliculas.actualizar(id, titulo + "," + director + "," + year + "," + genero + "," + precio + "," + Login.gestorPeliculas.getPeliculas().get(id).getNumeroDeVentas());
                 rellenarTabla();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error all actualizar los datos", "Error", 0);
+                JOptionPane.showMessageDialog(null, "Error al actualizar los datos", "Error", 0);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No hay cliente seleccionado", "Error", 0);
@@ -295,7 +295,7 @@ public class VerPeliculas extends javax.swing.JFrame {
         try {
             long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
             try {
-                Login.gestorPeliculas.eliminar((long) id);
+                Login.gestorPeliculas.eliminar(id);
                 rellenarTabla();
             } catch (IOException ex) {
                 System.out.println("dojoda 1");

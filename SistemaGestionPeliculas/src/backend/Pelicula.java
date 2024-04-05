@@ -91,7 +91,7 @@ public class Pelicula implements Comparable<Pelicula> {
 
     @Override
     public String toString() {
-        return id + "," + titulo + "," + director + "," + year + "," + genero + "," + precio + "," + numeroDeVentas ;
+        return id + "," + titulo + "," + director + "," + year + "," + genero + "," + precio + "," + numeroDeVentas;
     }
 
     @Override

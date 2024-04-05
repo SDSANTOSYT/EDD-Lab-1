@@ -47,7 +47,7 @@ public class GestorClientes extends Gestor {
             JOptionPane.showMessageDialog(null, "El cliente ya se encuentra registrado.", "ERROR", 0);
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
-            bw.write(cli.toString());
+            bw.write(cli.toString() + "\n");
             bw.close();
             clientes.put(cli.getId(), cli);
             JOptionPane.showMessageDialog(null, "Cliente registrado con exito.", "Registro", 1);
@@ -79,7 +79,7 @@ public class GestorClientes extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Cliente> cliente : clientes.entrySet()) {
                 Cliente value = cliente.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString() + "\n");
             }
             bw.close();
             JOptionPane.showMessageDialog(null, "Cliente actualizado con exito.", "Actualizar", 1);
@@ -96,7 +96,7 @@ public class GestorClientes extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Cliente> cliente : clientes.entrySet()) {
                 Cliente value = cliente.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString() + "\n");
             }
             bw.close();
             JOptionPane.showMessageDialog(null, "Cliente eliminado con exito.", "Eliminar", 1);

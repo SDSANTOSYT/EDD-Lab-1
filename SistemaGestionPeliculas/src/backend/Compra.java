@@ -61,7 +61,7 @@ public class Compra implements Comparable<Compra> {
 
     @Override
     public String toString() {
-        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) ;
+        return idCompra + "," + idCliente + "," + idPelicula + "," + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override

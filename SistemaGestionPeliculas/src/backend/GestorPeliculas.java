@@ -46,7 +46,7 @@ public class GestorPeliculas extends Gestor {
             JOptionPane.showMessageDialog(null, "La pelicula ya se encuentra registrada.", "ERROR", 0);
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
-            bw.write(pel.toString()+"\n");
+            bw.write(pel.toString() + "\n");
             bw.close();
             peliculas.put(pel.getId(), pel);
             JOptionPane.showMessageDialog(null, "Pelicula registrada con exito.", "Registro", 1);
@@ -78,9 +78,9 @@ public class GestorPeliculas extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Pelicula> pelicula : peliculas.entrySet()) {
                 Pelicula value = pelicula.getValue();
-                bw.write(value.toString()+"\n");
-                bw.close();
+                bw.write(value.toString() + "\n");
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Pelicula actualizada con exito.", "Actualizar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "La pelicula no se encuentra registrada.", "ERROR", 0);
@@ -95,9 +95,9 @@ public class GestorPeliculas extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Pelicula> pelicula : peliculas.entrySet()) {
                 Pelicula value = pelicula.getValue();
-                bw.write(value.toString()+"\n");
-                bw.close();
+                bw.write(value.toString() + "\n");
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Pelicula eliminada con exito.", "Eliminar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "La pelicula no se encuentra registrada.", "ERROR", 0);
@@ -146,9 +146,9 @@ public class GestorPeliculas extends Gestor {
         }
         return filtrado;
     }
-    
+
     public static void main(String[] args) throws IOException {
-        
+
         GestorPeliculas gesPel = new GestorPeliculas("PruebaPeliculas");
         gesPel.agregar(new Pelicula(1, "Pel1", "Dir1", 2012, "gen1", 1, 5));
         gesPel.agregar(new Pelicula(2, "Pel1", "Dir1", 2012, "gen1", 1, 5));
@@ -158,8 +158,8 @@ public class GestorPeliculas extends Gestor {
         gesPel.agregar(new Pelicula(6, "Pel6", "Dir2", 2013, "gen2", 2, 5));
         gesPel.agregar(new Pelicula(7, "Pel7", "Dir2", 2013, "gen2", 2, 5));
         gesPel.agregar(new Pelicula(8, "Pel8", "Dir2", 2013, "gen2", 2, 5));
-       
-        gesPel.buscarPorId((long)1);
+
+        gesPel.buscarPorId((long) 1);
         //1 director
         //2 genero
         //3 titulo

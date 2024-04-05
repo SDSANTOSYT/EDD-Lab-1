@@ -6,7 +6,9 @@ package frontend.usuario;
 
 import backend.Compra;
 import backend.Pelicula;
+import frontend.Login;
 import static frontend.Login.cliente;
+import static frontend.Login.gestorCliente;
 import static frontend.Login.gestorCompras;
 import static frontend.Login.gestorPeliculas;
 import java.awt.HeadlessException;
@@ -416,6 +418,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 Compra com = new Compra(0, cliente.getId(), pelicula.getId(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 gestorPeliculas.actualizar(pelicula.getId(), pelicula.getTitulo() + "," + pelicula.getDirector() + "," + pelicula.getYear() + "," + pelicula.getGenero() + "," + pelicula.getPrecio() + "," + (gestorPeliculas.getPeliculas().get(pelicula.getId()).getNumeroDeVentas() + 1));
                 gestorCompras.agregar(com);
+                gestorCliente.actualizar(cliente.getId(), cliente.getNombre() + "," + cliente.getEmail() + "," + cliente.getDireccion() + "," + (gestorCliente.getClientes().get(cliente.getId()).getNumeroDeCompras()+1));
             }
             peliculasEnCarrito.removeAll(peliculasEnCarrito);
             rellenarTablaCarrito();

@@ -49,7 +49,7 @@ public class GestorCompras extends Gestor {
             JOptionPane.showMessageDialog(null, "La compra ya se encuentra registrada.", "ERROR", 0);
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
-            bw.write(com.toString()+"\n");
+            bw.write(com.toString() + "\n");
             bw.close();
             compras.put(com.getIdCompra(), com);
             JOptionPane.showMessageDialog(null, "Compra registrada con exito.", "Registro", 1);
@@ -81,9 +81,9 @@ public class GestorCompras extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
                 Compra value = compra.getValue();
-                bw.write(value.toString()+"\n");
-                bw.close();
+                bw.write(value.toString() + "\n");
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Compra actualizada con exito.", "Actualizar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "La compra no se encuentra registrada.", "ERROR", 0);
@@ -98,9 +98,9 @@ public class GestorCompras extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
                 Compra value = compra.getValue();
-                bw.write(value.toString()+"\n");
-                bw.close();
+                bw.write(value.toString() + "\n");
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Compra eliminada con exito.", "Eliminar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "La compra no se encuentra registrada.", "ERROR", 0);
@@ -114,7 +114,7 @@ public class GestorCompras extends Gestor {
 
     @Override
     public ArrayList<String> buscarPorClaveSecundaria(String Clave, int Option) {
-        ArrayList <String> filtrado = new ArrayList<>();
+        ArrayList<String> filtrado = new ArrayList<>();
 
         for (Long id : compras.keySet()) {
             if (compras.get(id).getIdCliente() == Long.parseLong(Clave)) {
@@ -126,9 +126,9 @@ public class GestorCompras extends Gestor {
         }
         return filtrado;
     }
-    
+
     public static void main(String[] args) throws IOException {
-        
+
         GestorCompras gesCom = new GestorCompras("PruebaCompras");
         gesCom.agregar(new Compra(1, 1, 1, "29/12/2005"));
         gesCom.agregar(new Compra(2, 1, 2, "29/12/2006"));
@@ -140,9 +140,9 @@ public class GestorCompras extends Gestor {
         gesCom.agregar(new Compra(8, 8, 2, "29/11/2008"));
         gesCom.agregar(new Compra(9, 9, 1, "29/11/2009"));
         gesCom.agregar(new Compra(10, 10, 2, "29/07/2007"));
-        
-        gesCom.buscarPorId((long)5);
-        for (String com : gesCom.buscarPorClaveSecundaria("1", 0)){
+
+        gesCom.buscarPorId((long) 5);
+        for (String com : gesCom.buscarPorClaveSecundaria("1", 0)) {
             System.out.println(com);
         }
     }
