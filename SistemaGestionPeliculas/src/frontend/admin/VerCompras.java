@@ -13,6 +13,7 @@ import frontend.Login;
 import static frontend.Login.gestorPeliculas;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +32,6 @@ public class VerCompras extends javax.swing.JFrame {
 
     public void rellenarTabla() {
         String nombresColumnas[] = {"ID Compra", "ID Cliente", "ID Película", "Fecha"};
-        List<Compra> listaCompras = new ArrayList<>(Login.gestorCompras.getCompras().values());
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -39,7 +39,8 @@ public class VerCompras extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        for (Compra compra : listaCompras) {
+        for (Map.Entry<Long, Compra> entry : Login.gestorCompras.getCompras().entrySet()) {
+            Compra compra = entry.getValue();
             model.addRow(new Object[]{compra.getIdCompra(), compra.getIdCliente(), compra.getIdPelicula(), compra.getFecha()});
         }
         tablaCompras.setModel(model);
@@ -209,7 +210,7 @@ public class VerCompras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JTable tablaCompras;
+    private static javax.swing.JTable tablaCompras;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel titulo2;
     // End of variables declaration//GEN-END:variables

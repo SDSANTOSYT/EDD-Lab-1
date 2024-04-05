@@ -49,7 +49,7 @@ public class GestorCompras extends Gestor {
             JOptionPane.showMessageDialog(null, "La compra ya se encuentra registrada.", "ERROR", 0);
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
-            bw.write(com.toString());
+            bw.write(com.toString()+"\n");
             bw.close();
             compras.put(com.getIdCompra(), com);
             JOptionPane.showMessageDialog(null, "Compra registrada con exito.", "Registro", 1);
@@ -81,7 +81,7 @@ public class GestorCompras extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
                 Compra value = compra.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString()+"\n");
                 bw.close();
             }
             JOptionPane.showMessageDialog(null, "Compra actualizada con exito.", "Actualizar", 1);
@@ -98,7 +98,7 @@ public class GestorCompras extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Compra> compra : compras.entrySet()) {
                 Compra value = compra.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString()+"\n");
                 bw.close();
             }
             JOptionPane.showMessageDialog(null, "Compra eliminada con exito.", "Eliminar", 1);

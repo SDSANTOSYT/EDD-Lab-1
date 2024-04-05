@@ -46,7 +46,7 @@ public class GestorPeliculas extends Gestor {
             JOptionPane.showMessageDialog(null, "La pelicula ya se encuentra registrada.", "ERROR", 0);
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt", true));
-            bw.write(pel.toString());
+            bw.write(pel.toString()+"\n");
             bw.close();
             peliculas.put(pel.getId(), pel);
             JOptionPane.showMessageDialog(null, "Pelicula registrada con exito.", "Registro", 1);
@@ -78,7 +78,7 @@ public class GestorPeliculas extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Pelicula> pelicula : peliculas.entrySet()) {
                 Pelicula value = pelicula.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString()+"\n");
                 bw.close();
             }
             JOptionPane.showMessageDialog(null, "Pelicula actualizada con exito.", "Actualizar", 1);
@@ -95,7 +95,7 @@ public class GestorPeliculas extends Gestor {
             BufferedWriter bw = new BufferedWriter(new FileWriter(ruta + ".txt"));
             for (Map.Entry<Long, Pelicula> pelicula : peliculas.entrySet()) {
                 Pelicula value = pelicula.getValue();
-                bw.write(value.toString());
+                bw.write(value.toString()+"\n");
                 bw.close();
             }
             JOptionPane.showMessageDialog(null, "Pelicula eliminada con exito.", "Eliminar", 1);

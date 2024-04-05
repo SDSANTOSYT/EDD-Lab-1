@@ -80,7 +80,6 @@ public class GestorClientes extends Gestor {
             for (Map.Entry<Long, Cliente> cliente : clientes.entrySet()) {
                 Cliente value = cliente.getValue();
                 bw.write(value.toString());
-                
             }
             bw.close();
             JOptionPane.showMessageDialog(null, "Cliente actualizado con exito.", "Actualizar", 1);
@@ -98,8 +97,8 @@ public class GestorClientes extends Gestor {
             for (Map.Entry<Long, Cliente> cliente : clientes.entrySet()) {
                 Cliente value = cliente.getValue();
                 bw.write(value.toString());
-                bw.close();
             }
+            bw.close();
             JOptionPane.showMessageDialog(null, "Cliente eliminado con exito.", "Eliminar", 1);
         } else {
             JOptionPane.showMessageDialog(null, "El cliente no se encuentra registrado.", "ERROR", 0);
@@ -108,28 +107,16 @@ public class GestorClientes extends Gestor {
 
     @Override
     public String buscarPorId(Long id) {
-        return clientes.get(id).toString();
+        if (id == null) {
+            return "";
+        } else {
+            return clientes.get(id).toString();
+        }
+
     }
 
     @Override
     public ArrayList buscarPorClaveSecundaria(String Clave, int Option) {
         return null;
-    }
-    
-    public static void main(String[] args) throws IOException {
-        
-        GestorClientes gesCli = new GestorClientes("PruebaClientes");
-        gesCli.agregar(new Cliente(1, "n1", "e1", "d1", 1));
-        gesCli.agregar(new Cliente(2, "n2", "e2", "d2", 1));
-        gesCli.agregar(new Cliente(3, "n3", "e3", "d3", 1));
-        gesCli.agregar(new Cliente(4, "n4", "e4", "d4", 1));
-        gesCli.agregar(new Cliente(5, "n5", "e5", "d5", 1));
-        gesCli.agregar(new Cliente(6, "n6", "e6", "d6", 1));
-        gesCli.agregar(new Cliente(7, "n7", "e7", "d7", 1));
-        gesCli.agregar(new Cliente(8, "n8", "e8", "d8", 1));
-        gesCli.agregar(new Cliente(9, "n9", "e9", "d9", 1));
-        gesCli.agregar(new Cliente(10, "n10", "e10", "d10", 1));
-        
-        System.out.println(gesCli.buscarPorId((long)5));
     }
 }

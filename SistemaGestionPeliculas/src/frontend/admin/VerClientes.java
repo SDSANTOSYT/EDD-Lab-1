@@ -5,18 +5,10 @@
 package frontend.admin;
 
 import backend.Cliente;
-import backend.Compra;
-import backend.GestorClientes;
-import backend.GestorCompras;
-import backend.Pelicula;
 import frontend.Login;
-import static frontend.Login.gestorPeliculas;
 import frontend.usuario.RegistrarUsuarioCliente;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,7 +31,6 @@ public class VerClientes extends javax.swing.JFrame {
      */
     public void rellenarTabla() {
         String nombresColumnas[] = {"ID", "Nombre", "Email", "Dirección", "Número de Compras"};
-        List<Cliente> listaClientes = new ArrayList<>(Login.gestorCliente.getClientes().values());
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -47,10 +38,11 @@ public class VerClientes extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        for (Cliente cliente : listaClientes) {
+        for (Map.Entry<Long, Cliente> entry : Login.gestorCliente.getClientes().entrySet()) {
+            Cliente cliente = entry.getValue();
             model.addRow(new Object[]{cliente.getId(), cliente.getNombre(), cliente.getEmail(), cliente.getDireccion(), cliente.getNumeroDeCompras()});
         }
-        tablaCompras.setModel(model);
+        tablaClientes.setModel(model);
     }
 
     /**
@@ -64,7 +56,7 @@ public class VerClientes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         ScrollCliente = new javax.swing.JScrollPane();
-        tablaCompras = new javax.swing.JTable();
+        tablaClientes = new javax.swing.JTable();
         titulo1 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
         AgregarText = new javax.swing.JLabel();
@@ -92,8 +84,8 @@ public class VerClientes extends javax.swing.JFrame {
 
         ScrollCliente.setBackground(new java.awt.Color(230, 230, 230));
 
-        tablaCompras.setBackground(new java.awt.Color(230, 230, 230));
-        tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
+        tablaClientes.setBackground(new java.awt.Color(230, 230, 230));
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,8 +104,8 @@ public class VerClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaCompras.setShowGrid(false);
-        ScrollCliente.setViewportView(tablaCompras);
+        tablaClientes.setShowGrid(false);
+        ScrollCliente.setViewportView(tablaClientes);
 
         jPanel1.add(ScrollCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, 240));
 
@@ -219,61 +211,49 @@ public class VerClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverButtonActionPerformed
 
     private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
-
         new RegistrarUsuarioCliente().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_AgregarButtonActionPerformed
 
     private void EliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarButtonActionPerformed
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
-        if (idStr != null) {
-            Long id = Long.valueOf(idStr);
-            if (Login.gestorCliente.getClientes().get(id) == null) {
-                JOptionPane.showMessageDialog(rootPane, "Usuario con ID " + id + " no existe", "Error", 0);
-            } else {
-                try {
-                    Login.gestorCliente.eliminar(id);
-                    rellenarTabla();
-                } catch (IOException ex) {
-                    Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        try {
+            long id = (long) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 0);
+            try {
+                Login.gestorCliente.eliminar((long) id);
+                rellenarTabla();
+            } catch (IOException ex) {
+                System.out.println("dojoda 1");
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No hay cliente seleccionado", "Error", 0);
         }
     }//GEN-LAST:event_EliminarButtonActionPerformed
 
     private void ActualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtonActionPerformed
-        Long id;
-        String nombre;
-        String email;
-        String direccion;
-        int numeroDeCompras;
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
-        if (idStr != null) {
-            id = Long.valueOf(idStr);
-            if (Login.gestorCliente.getClientes().get(id) == null) {
-                JOptionPane.showMessageDialog(rootPane, "Usuario con ID " + id + " no existe", "Error", 0);
-            } else {
-                try {
-                    nombre = JOptionPane.showInputDialog("Ingrese el nombre: ", Login.gestorCliente.getClientes().get(id).getNombre());
-                    if (nombre != null) {
-                        email = JOptionPane.showInputDialog("Ingrese el email: ", Login.gestorCliente.getClientes().get(id).getEmail());
-                        if (email != null) {
-                            direccion = JOptionPane.showInputDialog("Ingrese la dirección: ", Login.gestorCliente.getClientes().get(id).getDireccion());
-                            if (direccion != null) {
-                                Login.gestorCliente.actualizar(id, nombre + "," + email + "," + direccion + "," + Login.gestorCliente.getClientes().get(id).getNumeroDeCompras());
-                                rellenarTabla();
-                            }
-                        }
-                    }
-                    rellenarTabla();
-                } catch (IOException ex) {
-                    Logger.getLogger(VerClientes.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            long id = (long) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 0);
+            try {
+                String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente: ", "Actualizar Cliente", JOptionPane.QUESTION_MESSAGE);
+                if (nombre == null || nombre.isEmpty() || nombre.isBlank()) {
+                    nombre = (String) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 1);
                 }
+                String email = JOptionPane.showInputDialog(null, "Ingrese el email del cliente: ", "Actualizar Cliente", JOptionPane.QUESTION_MESSAGE);
+                if (email == null || email.isEmpty() || email.isBlank()) {
+                    email = (String) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 2);
+                }
+                String direccion = JOptionPane.showInputDialog(null, "Ingrese la direccion del cliente: ", "Actualizar Cliente", JOptionPane.QUESTION_MESSAGE);
+                if (direccion == null || direccion.isEmpty() || direccion.isBlank()) {
+                    direccion = (String) tablaClientes.getModel().getValueAt(tablaClientes.getSelectedRow(), 3);
+                }
+                Login.gestorCliente.actualizar(id, nombre + "," + email + "," + direccion + "," + Login.gestorCliente.getClientes().get(id).getNumeroDeCompras());
+                rellenarTabla();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error all actualizar los datos", "Error", 0);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No hay cliente seleccionado", "Error", 0);
         }
-
-
     }//GEN-LAST:event_ActualizarButtonActionPerformed
 
     /**
@@ -334,7 +314,7 @@ public class VerClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JTable tablaCompras;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel titulo2;
     // End of variables declaration//GEN-END:variables

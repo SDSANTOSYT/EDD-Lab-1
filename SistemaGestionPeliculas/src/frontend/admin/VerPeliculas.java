@@ -4,19 +4,10 @@
  */
 package frontend.admin;
 
-import backend.Cliente;
-import backend.Compra;
-import backend.GestorClientes;
-import backend.GestorCompras;
 import backend.Pelicula;
 import frontend.Login;
-import static frontend.Login.gestorPeliculas;
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,8 +25,7 @@ public class VerPeliculas extends javax.swing.JFrame {
     }
 
     public void rellenarTabla() {
-        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio","Numero de Ventas"};
-        List<Pelicula> listaPeliculas = new ArrayList<>(gestorPeliculas.getPeliculas().values());
+        String nombresColumnas[] = {"ID", "Titulo", "Director", "Año", "Genero", "Precio", "Numero de Ventas"};
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -43,8 +33,9 @@ public class VerPeliculas extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(nombresColumnas);
-        for (Pelicula pelicula : listaPeliculas) {
-            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio(),pelicula.getNumeroDeVentas()});
+        for (Map.Entry<Long, Pelicula> entry : Login.gestorPeliculas.getPeliculas().entrySet()) {
+            Pelicula pelicula = entry.getValue();
+            model.addRow(new Object[]{pelicula.getId(), pelicula.getTitulo(), pelicula.getDirector(), pelicula.getYear(), pelicula.getGenero(), pelicula.getPrecio(), pelicula.getNumeroDeVentas()});
         }
         tablaPeliculas.setModel(model);
     }
@@ -214,84 +205,77 @@ public class VerPeliculas extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverButtonActionPerformed
 
     private void ActualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtonActionPerformed
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
-        Long id;
-        String titulo;
-        String director;
-        int year;
-        String genero;
-        double precio;
-        int numeroDeVentas;
-        if (idStr != null) {
-            id = Long.valueOf(idStr);
-            if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
-                JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " no existe", "Error", 0);
-            } else {
-                id = Long.parseLong(idStr);
-                try {
-                        titulo = JOptionPane.showInputDialog("Ingrese el título: ", Login.gestorPeliculas.getPeliculas().get(id).getTitulo());
-                        if (titulo != null) {
-                            director = JOptionPane.showInputDialog("Ingrese el director: ", Login.gestorPeliculas.getPeliculas().get(id).getDirector());
-                            if (director != null) {
-                                String yearStr = JOptionPane.showInputDialog("Ingrese el año: ", Login.gestorPeliculas.getPeliculas().get(id).getYear());
-                                if (yearStr != null) {
-                                    year = Integer.parseInt(yearStr);
-                                    String generoStr = JOptionPane.showInputDialog("Ingrese el género: ", Login.gestorPeliculas.getPeliculas().get(id).getGenero());
-                                    if (generoStr != null) {
-                                        genero = generoStr;
-                                        String precioStr = JOptionPane.showInputDialog("Ingrese el precio: ", Login.gestorPeliculas.getPeliculas().get(id).getPrecio());
-                                        if (precioStr != null) {
-                                            precio = Double.parseDouble(precioStr);
-                                            Login.gestorPeliculas.actualizar(id, titulo + "," + director + "," + year + "," + genero + "," + precio + "," + Login.gestorPeliculas.getPeliculas().get(id).getNumeroDeVentas());
-                                            rellenarTabla();
-                                        }
-                                    }
-                                }
-                            }
-                        
-
-                    }
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        try {
+            long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
+            try {
+                String titulo = JOptionPane.showInputDialog(null, "Ingrese el titulo de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                if (titulo == null || titulo.isEmpty() || titulo.isBlank()) {
+                    titulo = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 1);
                 }
+                String director = JOptionPane.showInputDialog(null, "Ingrese el nombre del director: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                if (director == null || director.isEmpty() || director.isBlank()) {
+                    director = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 2);
+                }
+                String year = JOptionPane.showInputDialog(null, "Ingrese el año de lanzamiento de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                if (year == null || year.isEmpty() || year.isBlank()) {
+                    year = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 3);
+                }
+                String genero = JOptionPane.showInputDialog(null, "Ingrese el genero de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                if (genero == null || genero.isEmpty() || genero.isBlank()) {
+                    genero = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 4);
+                }
+                String precio = JOptionPane.showInputDialog(null, "Ingrese el preicio de la pelicula: ", "Actualizar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                if (precio == null || precio.isEmpty() || precio.isBlank()) {
+                    precio = (String) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 5);
+                }
+                Login.gestorPeliculas.actualizar(id, titulo + "," + director + "," + year + "," + genero + "," + precio + "," + Login.gestorPeliculas.getPeliculas().get(id).getNumeroDeVentas());
+                rellenarTabla();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error all actualizar los datos", "Error", 0);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No hay cliente seleccionado", "Error", 0);
         }
-
     }//GEN-LAST:event_ActualizarButtonActionPerformed
 
     private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
-
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
+        String idStr = (JOptionPane.showInputDialog(null, "Ingrese el ID: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE));
         Long id;
         String titulo;
         String director;
         int year;
         String genero;
         double precio;
-        int numeroDeVentas;
-        if (idStr
-                == null) {
-        } else {
+        if (idStr != null) {
             try {
                 id = Long.parseLong(idStr);
                 if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
-                    titulo = JOptionPane.showInputDialog("Ingrese el título: ");
+                    titulo = JOptionPane.showInputDialog(null,"Ingrese el título: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE);
                     if (titulo != null) {
-                        director = JOptionPane.showInputDialog("Ingrese el director: ");
+                        director = JOptionPane.showInputDialog(null, "Ingrese el director: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE);
                         if (director != null) {
-                            String yearStr = JOptionPane.showInputDialog("Ingrese el año: ");
+                            String yearStr = JOptionPane.showInputDialog(null, "Ingrese el año: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE);
                             if (yearStr != null) {
-                                year = Integer.parseInt(yearStr);
-                                String generoStr = JOptionPane.showInputDialog("Ingrese el género: ");
-                                if (generoStr != null) {
-                                    genero = generoStr;
-                                    String precioStr = JOptionPane.showInputDialog("Ingrese el precio: ");
-                                    if (precioStr != null) {
-                                        precio = Double.parseDouble(precioStr);
-                                        Pelicula peli = new Pelicula(id, titulo, director, year, genero, precio, 0);
-                                        Login.gestorPeliculas.agregar(peli);
-                                        rellenarTabla();
+                                try {
+                                    year = Integer.parseInt(yearStr);
+                                    String generoStr = JOptionPane.showInputDialog(null, "Ingrese el género: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                                    if (generoStr != null) {
+                                        genero = generoStr;
+                                        String precioStr = JOptionPane.showInputDialog(null, "Ingrese el precio: ", "Agregar Pelicula", JOptionPane.QUESTION_MESSAGE);
+                                        if (precioStr != null) {
+                                            try {
+                                                precio = Double.parseDouble(precioStr);
+                                                Pelicula peli = new Pelicula(id, titulo, director, year, genero, precio, 0);
+                                                Login.gestorPeliculas.agregar(peli);
+                                                rellenarTabla();
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(rootPane, "Error al ingresar el precio.", "Error", JOptionPane.ERROR_MESSAGE);
+                                            }
+
+                                        }
                                     }
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(rootPane, "Error al ingresar el año.", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                         }
@@ -299,8 +283,8 @@ public class VerPeliculas extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Error al ingresar el ID", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -308,20 +292,16 @@ public class VerPeliculas extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarButtonActionPerformed
 
     private void EliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarButtonActionPerformed
-        String idStr = (JOptionPane.showInputDialog("Ingrese el ID: "));
-        if (idStr != null) {
-            Long id = Long.valueOf(idStr);
-            if (Login.gestorPeliculas.getPeliculas().get(id) == null) {
-                JOptionPane.showMessageDialog(rootPane, "Pelicula con ID " + id + " no existe", "Error", 0);
-            } else {
-                try {
-                    Login.gestorPeliculas.eliminar(id);
-                } catch (IOException ex) {
-                    java.util.logging.Logger.getLogger(VerPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                }
+        try {
+            long id = (long) tablaPeliculas.getModel().getValueAt(tablaPeliculas.getSelectedRow(), 0);
+            try {
+                Login.gestorPeliculas.eliminar((long) id);
                 rellenarTabla();
-
+            } catch (IOException ex) {
+                System.out.println("dojoda 1");
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No hay pelicula seleccionada", "Error", 0);
         }
     }//GEN-LAST:event_EliminarButtonActionPerformed
 
